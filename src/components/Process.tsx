@@ -1,0 +1,64 @@
+import React from 'react';
+import { siteConfig } from '../config/site';
+
+const Process: React.FC = () => {
+    return (
+        <section id="process" className="py-24 px-4 bg-gray-50 scroll-mt-24">
+            <div className="container mx-auto">
+                <div className="text-center mb-20">
+                    <h2 className="text-4xl md:text-5xl font-black mb-4">Our 5-Step Process</h2>
+                    <p className="text-xl text-gray-500">How we get you from searching to settlement</p>
+                </div>
+                <div className="relative max-w-7xl mx-auto">
+                    {/* Main Grid Container */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 lg:gap-4 relative z-10">
+                        {siteConfig.processSteps.map((step: any, index: number) => (
+                            <div key={index} className="relative group flex flex-col items-center text-center">
+
+                                {/* Connector Arrow (Desktop Only) */}
+                                {index < siteConfig.processSteps.length - 1 && (
+                                    <div className="hidden lg:flex absolute top-10 left-[60%] w-[80%] h-8 z-20 items-center justify-center pointer-events-none">
+                                        <div className="w-full h-[3px] bg-gradient-to-r from-[#29b8bd] via-[#29b8bd] to-transparent relative opacity-30 group-hover:opacity-100 transition-opacity">
+                                            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 border-t-3 border-r-3 border-[#29b8bd] transform rotate-45"></div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Step Icon/Number Container */}
+                                <div className="relative mb-8">
+                                    <div className="w-20 h-20 rounded-3xl flex items-center justify-center text-white text-3xl font-black shadow-xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 relative z-10"
+                                        style={{ backgroundColor: '#29b8bd' }}>
+                                        <span className="absolute -top-3 -right-3 w-10 h-10 bg-white text-[#29b8bd] rounded-full text-lg flex items-center justify-center shadow-xl border-4 border-[#29b8bd]/10 font-black">
+                                            {index + 1}
+                                        </span>
+                                        <span className="text-4xl drop-shadow-md">{step.emoji}</span>
+                                    </div>
+
+                                    {/* Glowing background effect */}
+                                    <div className="absolute inset-0 bg-[#29b8bd]/20 blur-2xl rounded-full -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                </div>
+
+                                {/* Content */}
+                                <h3 className="font-black text-xl mb-4 text-gray-900 group-hover:text-[#29b8bd] transition-colors">{step.title}</h3>
+                                <p className="text-gray-600 font-medium leading-relaxed max-w-[200px] text-sm md:text-base">
+                                    {step.desc}
+                                </p>
+
+                                {/* Mobile/Tablet Arrow (Visual only) */}
+                                {index < siteConfig.processSteps.length - 1 && (
+                                    <div className="lg:hidden mt-8 text-[#29b8bd]/30 transform rotate-90">
+                                        <svg fill="currentColor" viewBox="0 0 24 24" className="w-8 h-8">
+                                            <path d="M13.025 1l-2.847 2.828 6.176 6.172H0v4h16.354l-6.176 6.172 2.847 2.828L23.025 12z" />
+                                        </svg>
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default Process;

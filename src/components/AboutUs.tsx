@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import pujaVishalImg from '../assets/puja_vishal.jpg';
+import pujaVishalImg from '../assets/owners.jpeg';
 
 const AboutUsSection: React.FC = () => {
     return (

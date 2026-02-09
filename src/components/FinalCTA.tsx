@@ -1,5 +1,6 @@
 import React from 'react';
 import { siteConfig } from '../config/site';
+import { openCalendlyPopup } from '../utils/calendly';
 
 const FinalCTA: React.FC = () => {
     return (
@@ -30,17 +31,15 @@ const FinalCTA: React.FC = () => {
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                            <a
-                                href={siteConfig.contact.calendly}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                            <button
+                                onClick={openCalendlyPopup}
                                 className="w-full sm:w-auto px-12 py-6 bg-[#29b8bd] text-white font-black rounded-2xl text-xl transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_20px_50px_rgba(41,184,189,0.3)] flex items-center justify-center group"
                             >
                                 Book Your Free Consultation
                                 <svg className="w-6 h-6 ml-3 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                 </svg>
-                            </a>
+                            </button>
 
                             <div className="flex items-center gap-4 text-gray-400 font-bold">
                                 <div className="flex -space-x-3">

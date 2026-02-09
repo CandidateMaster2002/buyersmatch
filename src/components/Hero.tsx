@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { siteConfig } from '../config/site';
+import { openCalendlyPopup } from '../utils/calendly';
 import tabletMapImg from '../assets/tablet_map.png';
 import laptopAnalyticsImg from '../assets/laptop_analytics.png';
 import homeImg from '../assets/home.png';
@@ -173,14 +173,12 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
                             animate="visible"
                             className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-6 pt-2"
                         >
-                            <a
-                                href={siteConfig.contact.calendly}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                            <button
+                                onClick={openCalendlyPopup}
                                 className="w-full sm:w-auto px-8 py-4 md:px-10 md:py-5 text-white font-bold md:font-black rounded-xl text-base md:text-lg transition-all duration-300 hover:shadow-2xl hover:shadow-[#29b8bd]/30 active:scale-[0.98] shadow-xl shadow-[#29b8bd]/20 bg-[#29b8bd] text-center"
                             >
                                 Book Free Consultation
-                            </a>
+                            </button>
 
                             {/* Secondary CTA */}
                             <button

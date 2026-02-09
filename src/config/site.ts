@@ -125,16 +125,6 @@ export const siteConfig = {
     ],
     whoWeHelp: [
         {
-            title: "Owner Occupiers",
-            image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            content: "Finding your dream home that fits your lifestyle and budget. We understand the emotional significance and work tirelessly to match you with the perfect home."
-        },
-        {
-            title: "First Home Buyers",
-            image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            content: "Navigating the property market with expert guidance. We simplify the complex process and help you make informed decisions for your first purchase."
-        },
-        {
             title: "Property Investors",
             image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
             content: "Building property portfolios across Australia. We identify high-growth opportunities and optimize your investment strategy for maximum yield."

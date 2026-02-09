@@ -13,6 +13,7 @@ import Awards from './Awards';
 import Blog from './Blog';
 import FinalCTA from './FinalCTA';
 import StickyCTA from './StickyCTA';
+import TopBar from './TopBar';
 import Footer from './Footer';
 import AboutUsSection from './AboutUs';
 import WhatsAppButton from './WhatsAppButton';
@@ -34,6 +35,7 @@ const SectionWrapper = ({ children }: { children: React.ReactNode }) => (
 const BuyersMatchLandingPage = () => {
     const [isStickyCTAVisible, setIsStickyCTAVisible] = useState(false);
     const [isFinalCTAInView, setIsFinalCTAInView] = useState(false);
+    const [isFooterInView, setIsFooterInView] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -42,7 +44,7 @@ const BuyersMatchLandingPage = () => {
             setIsStickyCTAVisible(scrollPosition > threshold && !isFinalCTAInView);
         };
 
-        const observer = new IntersectionObserver(
+        const finalCtaObserver = new IntersectionObserver(
             ([entry]) => {
                 setIsFinalCTAInView(entry.isIntersecting);
             },
@@ -52,16 +54,33 @@ const BuyersMatchLandingPage = () => {
             }
         );
 
+        const footerObserver = new IntersectionObserver(
+            ([entry]) => {
+                setIsFooterInView(entry.isIntersecting);
+            },
+            {
+                root: null,
+                threshold: 0.1,
+            }
+        );
+
         const finalCtaElement = document.getElementById('final-cta');
+        const footerElement = document.querySelector('footer');
+
         if (finalCtaElement) {
-            observer.observe(finalCtaElement);
+            finalCtaObserver.observe(finalCtaElement);
+        }
+
+        if (footerElement) {
+            footerObserver.observe(footerElement);
         }
 
         window.addEventListener('scroll', handleScroll);
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
-            if (finalCtaElement) observer.unobserve(finalCtaElement);
+            if (finalCtaElement) finalCtaObserver.unobserve(finalCtaElement);
+            if (footerElement) footerObserver.unobserve(footerElement);
         };
     }, [isFinalCTAInView]);
 
@@ -115,8 +134,11 @@ const BuyersMatchLandingPage = () => {
                 )}
             </AnimatePresence>
 
-            <Footer />
-            <WhatsAppButton />
+            <TopBar />
+            <Footer scrollToSection={scrollToSection} />
+
+            {/* WhatsApp Button - Hidden when footer is in view */}
+            {!isFooterInView && <WhatsAppButton />}
         </div>
     );
 };

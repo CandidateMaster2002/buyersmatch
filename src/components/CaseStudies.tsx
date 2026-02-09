@@ -50,9 +50,6 @@ const CaseStudies: React.FC = () => {
                                         <div className="font-black text-2xl text-gray-900">Off Market</div>
                                     </div>
                                 </div>
-                                <button className="w-full mt-10 py-4 rounded-2xl border-2 border-gray-100 font-bold hover:bg-gray-50 hover:border-[#29b8bd]/20 transition-all duration-300">
-                                    View Full Case Study
-                                </button>
                             </div>
                         </div>
                     ))}

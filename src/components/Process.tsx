@@ -1,13 +1,17 @@
 import React from 'react';
 import { siteConfig } from '../config/site';
+import AnimatedText from './AnimatedText';
+import DrawingGuide from './DrawingGuide';
 
 const Process: React.FC = () => {
     return (
-        <section id="process" className="py-24 px-4 bg-gray-50 scroll-mt-24">
+        <section id="process" className="py-24 px-4 bg-white scroll-mt-24">
             <div className="container mx-auto">
-                <div className="text-center mb-20">
-                    <h2 className="text-4xl md:text-5xl font-black mb-4">Our 5-Step Process</h2>
-                    <p className="text-xl text-gray-500">How we get you from searching to settlement</p>
+                <div className="text-center mb-16">
+                    <AnimatedText
+                        text="Our 5-Step Process"
+                        className="text-4xl md:text-6xl font-black text-gray-900"
+                    />
                 </div>
                 <div className="relative max-w-7xl mx-auto">
                     {/* Main Grid Container */}
@@ -17,10 +21,11 @@ const Process: React.FC = () => {
 
                                 {/* Connector Arrow (Desktop Only) */}
                                 {index < siteConfig.processSteps.length - 1 && (
-                                    <div className="hidden lg:flex absolute top-10 left-[60%] w-[80%] h-8 z-20 items-center justify-center pointer-events-none">
-                                        <div className="w-full h-[3px] bg-gradient-to-r from-[#29b8bd] via-[#29b8bd] to-transparent relative opacity-30 group-hover:opacity-100 transition-opacity">
-                                            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 border-t-3 border-r-3 border-[#29b8bd] transform rotate-45"></div>
-                                        </div>
+                                    <div className="hidden lg:block absolute top-10 left-[70%] w-[60%] h-12 z-0 pointer-events-none">
+                                        <DrawingGuide
+                                            className="w-full h-full"
+                                            delay={index * 0.3}
+                                        />
                                     </div>
                                 )}
 

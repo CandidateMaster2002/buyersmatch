@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { siteConfig } from '../config/site';
 import { FacebookIcon, InstagramIcon, YouTubeIcon, LinkedInIcon, TikTokIcon, MapsIcon } from './SocialIcons';
 
@@ -20,40 +21,41 @@ const TopBar: React.FC<TopBarProps> = ({ className = '' }) => {
     };
 
     return (
-        <div className={`bg-gray-900 border-b border-white/5 py-1 px-4 ${className}`}>
-            <div className="container mx-auto flex flex-wrap justify-between items-center text-xs md:text-sm font-medium">
-                {/* Left: Contact Info */}
-                <div className="flex items-center space-x-6 text-gray-300">
-                    <a href={`mailto:${siteConfig.contact.email}`} className="flex items-center hover:text-white transition-colors">
-                        <svg className="w-4 h-4 mr-2 text-[#29b8bd]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
+        <div className={`bg-gradient-to-r from-[#0d2e2f] via-[#0a0a0a] to-[#0d2e2f] border-b border-[#29b8bd]/20 py-2.5 px-6 shadow-lg ${className}`}>
+            <div className="max-w-[1800px] mx-auto flex flex-col md:flex-row justify-between items-center gap-3 md:gap-0">
+                {/* Left: Contact Info - Vibrant Brand Styling */}
+                <div className="flex items-center space-x-6 text-[11px] md:text-[12px] font-black tracking-widest uppercase">
+                    <a href={`mailto:${siteConfig.contact.email}`} className="flex items-center text-[#29b8bd]/80 hover:text-[#29b8bd] transition-all duration-300">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#29b8bd] mr-3 animate-pulse shadow-[0_0_8px_#29b8bd]"></span>
                         {siteConfig.contact.email}
                     </a>
-                    <a href={`tel:${siteConfig.contact.phones[0]}`} className="flex items-center hover:text-white transition-colors">
-                        <svg className="w-4 h-4 mr-2 text-[#29b8bd]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                        </svg>
+                    <a href={`tel:${siteConfig.contact.phones[0]}`} className="hidden md:flex items-center text-gray-400 hover:text-white transition-all duration-300">
+                        <span className="w-1.5 h-1.5 rounded-full bg-gray-600 mr-3 group-hover:bg-white transition-all"></span>
                         {siteConfig.contact.phones[0]}
                     </a>
                 </div>
-                {/* Right: Social Media */}
-                <div className="flex items-center space-x-3">
-                    {siteConfig.socials.map((social) => {
-                        const Icon = getSocialIcon(social.name);
 
-                        return (
-                            <a
-                                key={social.name}
-                                href={social.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-9 h-9 flex items-center justify-center transition-transform duration-300 hover:scale-110"
-                            >
-                                <Icon className="block w-6 h-6 object-contain drop-shadow-sm" />
-                            </a>
-                        );
-                    })}
+                {/* Right: Social Media - "Vibrant Glass" Style */}
+                <div className="flex items-center space-x-4">
+                    <span className="text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase mr-2 hidden lg:block">Follow Us</span>
+                    <div className="flex items-center space-x-2.5">
+                        {siteConfig.socials.map((social) => {
+                            const Icon = getSocialIcon(social.name);
+                            return (
+                                <motion.a
+                                    key={social.name}
+                                    href={social.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    whileHover={{ scale: 1.1, y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="w-9 h-9 flex items-center justify-center rounded-xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.08] hover:border-[#29b8bd]/30 transition-all duration-300 shadow-sm"
+                                >
+                                    <Icon className="w-[18px] h-[18px] drop-shadow-md" />
+                                </motion.a>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </div>

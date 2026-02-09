@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { siteConfig } from '../config/site';
+import AnimatedText from './AnimatedText';
 
 const Awards: React.FC = () => {
     const [currentAwardIndex, setCurrentAwardIndex] = useState(0);
@@ -113,7 +114,10 @@ const Awards: React.FC = () => {
 
                     {/* Right: Story Content */}
                     <div className="w-full lg:w-3/5">
-                        <h2 className="text-4xl md:text-5xl font-black mb-8 text-gray-900 leading-tight">Excellence Recognized</h2>
+                        <AnimatedText
+                            text="Excellence Recognized"
+                            className="text-4xl md:text-6xl font-black text-gray-900 leading-tight mb-12"
+                        />
                         <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
                             <p className="font-bold text-2xl text-[#29b8bd]">Puja's Journey to Success</p>
                             <p>

@@ -1,16 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { siteConfig } from '../config/site';
+import AnimatedText from './AnimatedText';
 
 const Blog: React.FC = () => {
     const navigate = useNavigate();
 
     return (
-        <section id="blogs" className="py-24 px-4 bg-white scroll-mt-24">
+        <section id="blogs" className="py-24 px-4 bg-[#e8f7f7] scroll-mt-24">
             <div className="container mx-auto">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-black mb-4 text-gray-900">Expert Insights & News</h2>
-                    <p className="text-xl text-gray-500 max-w-2xl mx-auto">Stay updated with the latest trends and strategies in the Australian property market.</p>
+                    <AnimatedText
+                        text="Expert Insights & News"
+                        className="text-4xl md:text-6xl font-black text-gray-900"
+                    />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -49,14 +52,14 @@ const Blog: React.FC = () => {
                     ))}
                 </div>
 
-                <div className="mt-16 text-center">
+                {/* <div className="mt-16 text-center">
                     <button
                         onClick={() => navigate('/blogs')}
                         className="px-10 py-4 rounded-2xl bg-gray-900 text-white font-black hover:bg-[#29b8bd] transition-all duration-300 shadow-xl shadow-gray-200"
                     >
                         View All Articles
                     </button>
-                </div>
+                </div> */}
             </div>
         </section>
     );

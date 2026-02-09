@@ -8,7 +8,7 @@ import Services from './Services';
 import Process from './Process';
 import WhyChoose from './WhyChoose';
 import CaseStudies from './CaseStudies';
-import Testimonials from './Testimonials';
+import GoogleReviews from './GoogleReviews';
 import Awards from './Awards';
 import Blog from './Blog';
 import FinalCTA from './FinalCTA';
@@ -17,6 +17,8 @@ import TopBar from './TopBar';
 import Footer from './Footer';
 import AboutUsSection from './AboutUs';
 import WhatsAppButton from './WhatsAppButton';
+import FAQ from './FAQ';
+import VideoTestimonials from './VideoTestimonials';
 
 // Subtle section wrapper - fade + slight upward motion
 const SectionWrapper = ({ children }: { children: React.ReactNode }) => (
@@ -109,11 +111,15 @@ const BuyersMatchLandingPage = () => {
             <SectionWrapper><WhyChoose /></SectionWrapper>
             <SectionWrapper><AboutUsSection /></SectionWrapper>
             <SectionWrapper><CaseStudies /></SectionWrapper>
-            <SectionWrapper><Testimonials /></SectionWrapper>
+            <SectionWrapper><GoogleReviews /></SectionWrapper>
+            <SectionWrapper><VideoTestimonials /></SectionWrapper>
             <SectionWrapper><Awards /></SectionWrapper>
 
             {/* Blog - Minimized (SEO only) */}
             <SectionWrapper><Blog /></SectionWrapper>
+
+            {/* FAQ - Address Objections */}
+            <SectionWrapper><FAQ /></SectionWrapper>
 
             {/* Final CTA */}
             <SectionWrapper><FinalCTA /></SectionWrapper>

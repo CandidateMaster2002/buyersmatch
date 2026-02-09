@@ -1,5 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import AnimatedText from './AnimatedText';
+import TiltCard from './TiltCard';
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -23,6 +25,7 @@ const itemVariants = {
 };
 
 const Services: React.FC = () => {
+    // ... services definition ...
     const services = [
         {
             title: "Find the Right Property",
@@ -67,13 +70,13 @@ const Services: React.FC = () => {
     ];
 
     return (
-        <section id="approach" className="py-24 px-4 bg-white scroll-mt-24">
+        <section id="approach" className="py-24 px-4 bg-[#e8f7f7] scroll-mt-24">
             <div className="container mx-auto">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-black mb-4 text-gray-900">How We Help</h2>
-                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Four pillars of expert buyer representation
-                    </p>
+                    <AnimatedText
+                        text="How We Help"
+                        className="text-4xl md:text-6xl font-black text-gray-900"
+                    />
                 </div>
 
                 <motion.div
@@ -81,26 +84,29 @@ const Services: React.FC = () => {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-80px", amount: 0.2 }}
-                    className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+                    className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 [perspective:1000px]"
                 >
                     {services.map((service, index) => (
                         <motion.div
                             key={index}
                             variants={itemVariants}
-                            className="group bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:border-[#29b8bd]/30 transition-all duration-300 flex flex-col hover:shadow-lg"
                         >
-                            {/* Icon with gradient background - subtle hover lift */}
-                            <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center text-white mb-6 transition-all duration-300 group-hover:shadow-md`}>
-                                {service.icon}
-                            </div>
+                            <TiltCard>
+                                <div className="group bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:border-[#29b8bd]/30 transition-all duration-300 flex flex-col h-full hover:shadow-xl">
+                                    {/* Icon with gradient background - subtle hover lift */}
+                                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center text-white mb-6 transition-all duration-300 group-hover:shadow-md`}>
+                                        {service.icon}
+                                    </div>
 
-                            <h3 className="text-xl font-black mb-3 text-gray-900 group-hover:text-[#29b8bd] transition-colors duration-200">
-                                {service.title}
-                            </h3>
+                                    <h3 className="text-xl font-black mb-3 text-gray-900 group-hover:text-[#29b8bd] transition-colors duration-200">
+                                        {service.title}
+                                    </h3>
 
-                            <p className="text-gray-600 leading-relaxed">
-                                {service.description}
-                            </p>
+                                    <p className="text-gray-600 leading-relaxed font-medium">
+                                        {service.description}
+                                    </p>
+                                </div>
+                            </TiltCard>
                         </motion.div>
                     ))}
                 </motion.div>

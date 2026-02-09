@@ -1,10 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import AnimatedCounter from './AnimatedCounter';
+import AnimatedText from './AnimatedText';
 import pujaVishalImg from '../assets/owners.jpeg';
 
 const AboutUsSection: React.FC = () => {
     return (
-        <section id="about" className="py-16 md:py-20 px-4 bg-gradient-to-b from-white to-[#e8f7f7]/30 scroll-mt-24">
+        <section id="about" className="py-16 md:py-20 px-4 bg-white scroll-mt-24">
             <div className="container mx-auto max-w-7xl">
                 <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
                     {/* Left: Image */}
@@ -15,14 +17,13 @@ const AboutUsSection: React.FC = () => {
                         transition={{ duration: 0.6 }}
                         className="relative order-2 lg:order-1"
                     >
-                        {/* ... existing image content ... */}
                         <div className="relative">
                             {/* Main Image */}
-                            <div className="rounded-3xl overflow-hidden shadow-2xl">
+                            <div className="rounded-3xl overflow-hidden shadow-2xl max-h-[600px] aspect-[4/5]">
                                 <img
                                     src={pujaVishalImg}
                                     alt="Puja and Vishal - Founders of BuyersMatch"
-                                    className="w-full h-auto object-cover"
+                                    className="w-full h-full object-cover object-top"
                                 />
                             </div>
 
@@ -37,7 +38,9 @@ const AboutUsSection: React.FC = () => {
                                         ⭐
                                     </div>
                                     <div>
-                                        <div className="font-black text-gray-900 text-lg">500+</div>
+                                        <div className="font-black text-gray-900 text-lg">
+                                            <AnimatedCounter value={500} suffix="+" />
+                                        </div>
                                         <div className="text-gray-600 text-sm font-semibold">Happy Clients</div>
                                     </div>
                                 </div>
@@ -54,13 +57,11 @@ const AboutUsSection: React.FC = () => {
                         className="order-1 lg:order-2"
                     >
                         {/* Uniform Heading Structure */}
-                        <div className="mb-6">
-                            <h2 className="text-3xl md:text-5xl font-black mb-3 text-gray-900 leading-tight">
-                                About Us
-                            </h2>
-                            <p className="text-xl md:text-2xl text-[#29b8bd] font-bold">
-                                Meet Puja & Vishal
-                            </p>
+                        <div className="text-left mb-12">
+                            <AnimatedText
+                                text="About Us"
+                                className="text-4xl md:text-6xl font-black text-gray-900 leading-tight"
+                            />
                         </div>
 
                         {/* Mission Statement */}
@@ -91,9 +92,6 @@ const AboutUsSection: React.FC = () => {
                                 Let's make your real estate dreams shine bright! ✨
                             </p>
                         </div>
-
-                        {/* Stats Row */}
-
                     </motion.div>
                 </div>
             </div>

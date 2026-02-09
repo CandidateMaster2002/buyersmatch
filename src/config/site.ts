@@ -22,6 +22,7 @@ export const siteConfig = {
         { id: "why-choose", label: "Why Us" },
         { id: "case-studies", label: "Results" },
         { id: "testimonials", label: "Reviews" },
+        { id: "faq", label: "FAQ" },
     ],
     videoTestimonials: [
         {

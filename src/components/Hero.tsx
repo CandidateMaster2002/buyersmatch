@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { openCalendlyPopup } from '../utils/calendly';
+import MagneticButton from './MagneticButton';
+import AnimatedText from './AnimatedText';
+import SquiggleArrow from './SquiggleArrow';
+import HandDrawnCircle from './HandDrawnCircle';
 import tabletMapImg from '../assets/tablet_map.png';
 import laptopAnalyticsImg from '../assets/laptop_analytics.png';
 import homeImg from '../assets/home.png';
@@ -43,15 +47,6 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
 
         return () => clearInterval(interval);
     }, []);
-
-    const headlineVariants = {
-        hidden: { opacity: 0, y: 10 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.5 }
-        }
-    };
 
     const subheadlineVariants = {
         hidden: { opacity: 0, y: 10 },
@@ -113,7 +108,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
     };
 
     return (
-        <section className="relative py-16 md:py-24 px-4 sm:px-6 overflow-hidden bg-gradient-to-b from-[#e8f7f7] to-white">
+        <section className="relative py-16 md:py-24 px-4 sm:px-6 overflow-hidden bg-white">
             {/* Subtle background elements */}
             <div className="absolute top-[10%] right-[-5%] w-64 h-64 md:w-96 md:h-96 bg-[#29b8bd]/10 rounded-full blur-3xl animate-pulse"></div>
             <div className="absolute bottom-[10%] left-[-5%] w-48 h-48 md:w-72 md:h-72 bg-[#29b8bd]/5 rounded-full blur-3xl"></div>
@@ -122,22 +117,27 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
                 <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                     {/* Left: Content */}
                     <div className="text-center lg:text-left space-y-8">
-                        {/* Headline */}
-                        <motion.div
-                            variants={headlineVariants}
-                            initial="hidden"
-                            animate="visible"
-                            className="space-y-4"
-                        >
-                            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight text-gray-900">
-                                Buy like a Pro.
-                            </h1>
-                            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight">
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#29b8bd] to-[#1a8a8e]">
-                                    Your Perfect Property Match.
-                                </span>
-                            </h1>
-                        </motion.div>
+                        <div className="space-y-4">
+                            <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight text-gray-900">
+                                <AnimatedText
+                                    as="span"
+                                    text="Buy like a "
+                                />
+                                <HandDrawnCircle delay={1.2}>
+                                    <AnimatedText
+                                        as="span"
+                                        text="Pro."
+                                        delay={0.3}
+                                    />
+                                </HandDrawnCircle>
+                            </div>
+                            <AnimatedText
+                                as="h1"
+                                text="Your Perfect Property Match."
+                                delay={0.5}
+                                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#29b8bd] to-[#1a8a8e]"
+                            />
+                        </div>
 
                         {/* Subheadline */}
                         <motion.div
@@ -167,30 +167,40 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
                         </div>
 
                         {/* CTAs */}
-                        <motion.div
-                            variants={ctaVariants}
-                            initial="hidden"
-                            animate="visible"
-                            className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-6 pt-2"
-                        >
-                            <button
-                                onClick={openCalendlyPopup}
-                                className="w-full sm:w-auto px-8 py-4 md:px-10 md:py-5 text-white font-bold md:font-black rounded-xl text-base md:text-lg transition-all duration-300 hover:shadow-2xl hover:shadow-[#29b8bd]/30 active:scale-[0.98] shadow-xl shadow-[#29b8bd]/20 bg-[#29b8bd] text-center"
+                        <div className="relative">
+                            <motion.div
+                                variants={ctaVariants}
+                                initial="hidden"
+                                animate="visible"
+                                className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-6 pt-2"
                             >
-                                Book Free Consultation
-                            </button>
+                                <MagneticButton>
+                                    <button
+                                        onClick={openCalendlyPopup}
+                                        className="w-full sm:w-auto px-8 py-4 md:px-10 md:py-5 text-white font-bold md:font-black rounded-xl text-base md:text-lg transition-all duration-300 hover:shadow-2xl hover:shadow-[#29b8bd]/30 active:scale-[0.98] shadow-xl shadow-[#29b8bd]/20 bg-[#29b8bd] text-center"
+                                    >
+                                        Book Free Consultation
+                                    </button>
+                                </MagneticButton>
 
-                            {/* Secondary CTA */}
-                            <button
-                                onClick={() => scrollToSection('process')}
-                                className="text-gray-700 font-semibold md:font-bold text-base md:text-lg hover:text-[#29b8bd] transition-colors duration-200 flex items-center group"
-                            >
-                                See how it works
-                                <svg className="w-4 h-4 md:w-5 md:h-5 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                </svg>
-                            </button>
-                        </motion.div>
+                                <MagneticButton distance={0.2}>
+                                    <button
+                                        onClick={() => scrollToSection('process')}
+                                        className="text-gray-700 font-semibold md:font-bold text-base md:text-lg hover:text-[#29b8bd] transition-colors duration-200 flex items-center group px-4 py-2"
+                                    >
+                                        See how it works
+                                        <svg className="w-4 h-4 md:w-5 md:h-5 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                        </svg>
+                                    </button>
+                                </MagneticButton>
+                            </motion.div>
+
+                            {/* Visual Guide Squiggle */}
+                            <div className="hidden lg:block absolute -right-4 -top-16 w-32 h-32 transform -rotate-12 pointer-events-none opacity-60">
+                                <SquiggleArrow delay={1.2} />
+                            </div>
+                        </div>
                     </div>
 
                     {/* Right: Rotating Images */}

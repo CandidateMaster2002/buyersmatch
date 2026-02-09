@@ -1,8 +1,9 @@
 import React from 'react';
+import AnimatedCounter from './AnimatedCounter';
 
 const SocialProofStrip: React.FC = () => {
     return (
-        <section className="py-12 px-4 bg-white border-y border-gray-100">
+        <section className="py-12 px-4 bg-[#e8f7f7] border-y border-[#29b8bd]/10">
             <div className="container mx-auto">
                 <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
                     {/* Google Reviews */}
@@ -11,7 +12,9 @@ const SocialProofStrip: React.FC = () => {
                             ⭐⭐⭐⭐⭐
                         </div>
                         <div className="text-left">
-                            <div className="font-black text-gray-900 text-lg">79 Google Reviews</div>
+                            <div className="font-black text-gray-900 text-lg">
+                                <AnimatedCounter value={79} suffix=" Google Reviews" />
+                            </div>
                             <div className="text-gray-500 text-sm font-medium">4.9/5.0 Average Rating</div>
                         </div>
                     </div>
@@ -41,7 +44,9 @@ const SocialProofStrip: React.FC = () => {
                             </svg>
                         </div>
                         <div className="text-left">
-                            <div className="font-black text-gray-900 text-lg">500+ Happy Clients</div>
+                            <div className="font-black text-gray-900 text-lg">
+                                <AnimatedCounter value={500} suffix="+ Happy Clients" />
+                            </div>
                             <div className="text-gray-500 text-sm font-medium">Properties Secured</div>
                         </div>
                     </div>

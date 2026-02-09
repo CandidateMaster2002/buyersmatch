@@ -2,9 +2,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { siteConfig } from '../config/site';
 import AnimatedText from './AnimatedText';
-import houseSa from '../assets/house_sa.png';
-import houseWa from '../assets/house_wa.png';
-import houseQld from '../assets/house_qld.png';
+import houseSa from '../assets/house_sa.jpg';
+import houseWa from '../assets/house_wa.jpg';
+import houseQld from '../assets/house_qld.jpg';
 
 const CaseStudies: React.FC = () => {
     const storyImages = [houseSa, houseWa, houseQld];

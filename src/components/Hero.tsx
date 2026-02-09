@@ -5,9 +5,9 @@ import MagneticButton from './MagneticButton';
 import AnimatedText from './AnimatedText';
 import SquiggleArrow from './SquiggleArrow';
 import HandDrawnCircle from './HandDrawnCircle';
-import tabletMapImg from '../assets/tablet_map.png';
-import laptopAnalyticsImg from '../assets/laptop_analytics.png';
-import homeImg from '../assets/home.png';
+import tabletMapImg from '../assets/tablet_map.jpg';
+import laptopAnalyticsImg from '../assets/laptop_analytics.jpg';
+import homeImg from '../assets/home.jpg';
 
 interface HeroProps {
     scrollToSection: (id: string) => void;

@@ -1,10 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { siteConfig } from '../config/site';
 import { openCalendlyPopup } from '../utils/calendly';
 import AnimatedCounter from './AnimatedCounter';
 import MagneticButton from './MagneticButton';
-import AnimatedText from './AnimatedText';
 
 const FinalCTA: React.FC = () => {
     return (

@@ -7,19 +7,22 @@ import logo from '../assets/logo_removebg.png';
 
 interface NavbarProps {
     scrollToSection: (id: string) => void;
+    scrollTargetRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
+const Navbar: React.FC<NavbarProps> = ({ scrollToSection, scrollTargetRef }) => {
     const [activeSection, setActiveSection] = useState<string>('');
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
+        const handleScroll = (e: Event) => {
+            const target = e.target as HTMLDivElement;
+            const scrollY = scrollTargetRef ? target.scrollTop : window.scrollY;
+            setIsScrolled(scrollY > 20);
         };
 
         const observerOptions = {
-            root: null,
+            root: scrollTargetRef?.current || null,
             rootMargin: '-20% 0px -70% 0px',
             threshold: 0
         };
@@ -39,15 +42,17 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
             if (element) observer.observe(element);
         });
 
-        window.addEventListener('scroll', handleScroll);
+        const target = scrollTargetRef?.current || window;
+        target.addEventListener('scroll', handleScroll);
+
         return () => {
             observer.disconnect();
-            window.removeEventListener('scroll', handleScroll);
+            target.removeEventListener('scroll', handleScroll);
         };
-    }, []);
+    }, [scrollTargetRef]);
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-[100]">
+        <header className="relative z-[100] w-full bg-white">
             {/* Top Bar Header */}
             <TopBar className={`transition-all duration-300 ${isScrolled ? 'h-0 opacity-0 overflow-hidden' : 'h-auto opacity-100'}`} />
 
@@ -59,7 +64,13 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
                         {/* Logo */}
                         <div
                             className="flex items-center cursor-pointer group"
-                            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                            onClick={() => {
+                                if (scrollTargetRef?.current) {
+                                    scrollTargetRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+                                } else {
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                }
+                            }}
                         >
                             <img
                                 src={logo}

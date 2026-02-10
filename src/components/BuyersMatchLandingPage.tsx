@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './Navbar';
 import Hero from './Hero';
@@ -36,55 +36,54 @@ const SectionWrapper = ({ children }: { children: React.ReactNode }) => (
 
 const BuyersMatchLandingPage = () => {
     const [isStickyCTAVisible, setIsStickyCTAVisible] = useState(false);
-    const [isFinalCTAInView, setIsFinalCTAInView] = useState(false);
     const [isFooterInView, setIsFooterInView] = useState(false);
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const handleScroll = () => {
-            const scrollPosition = window.scrollY;
+        const handleScroll = (e: Event) => {
+            const target = e.target as HTMLDivElement;
+            const scrollPosition = target.scrollTop;
             const threshold = 600;
-            setIsStickyCTAVisible(scrollPosition > threshold && !isFinalCTAInView);
-        };
 
-        const finalCtaObserver = new IntersectionObserver(
-            ([entry]) => {
-                setIsFinalCTAInView(entry.isIntersecting);
-            },
-            {
-                root: null,
-                threshold: 0.1,
+            // Check if final-cta is in view manually since we're in a custom scroll container
+            const finalCta = document.getElementById('final-cta');
+            let isFinalCtaVisible = false;
+            if (finalCta) {
+                const rect = finalCta.getBoundingClientRect();
+                isFinalCtaVisible = rect.top < window.innerHeight && rect.bottom >= 0;
             }
-        );
+
+            setIsStickyCTAVisible(scrollPosition > threshold && !isFinalCtaVisible);
+        };
 
         const footerObserver = new IntersectionObserver(
             ([entry]) => {
                 setIsFooterInView(entry.isIntersecting);
             },
             {
-                root: null,
+                root: scrollContainerRef.current,
                 threshold: 0.1,
             }
         );
 
-        const finalCtaElement = document.getElementById('final-cta');
         const footerElement = document.querySelector('footer');
-
-        if (finalCtaElement) {
-            finalCtaObserver.observe(finalCtaElement);
-        }
 
         if (footerElement) {
             footerObserver.observe(footerElement);
         }
 
-        window.addEventListener('scroll', handleScroll);
+        const scrollContainer = scrollContainerRef.current;
+        if (scrollContainer) {
+            scrollContainer.addEventListener('scroll', handleScroll);
+        }
 
         return () => {
-            window.removeEventListener('scroll', handleScroll);
-            if (finalCtaElement) finalCtaObserver.unobserve(finalCtaElement);
+            if (scrollContainer) {
+                scrollContainer.removeEventListener('scroll', handleScroll);
+            }
             if (footerElement) footerObserver.unobserve(footerElement);
         };
-    }, [isFinalCTAInView]);
+    }, []);
 
     const scrollToSection = (id: string) => {
         const element = document.getElementById(id);
@@ -94,57 +93,66 @@ const BuyersMatchLandingPage = () => {
     };
 
     return (
-        <div className="font-sans text-gray-900 w-full overflow-x-hidden">
-            {/* Fixed Header */}
-            <Navbar scrollToSection={scrollToSection} />
+        <div
+            ref={scrollContainerRef}
+            className="h-screen w-full overflow-y-auto overflow-x-hidden scroll-smooth font-sans text-gray-900 bg-white"
+        >
+            {/* Header stays at the top in its own space and sticks */}
+            <div className="sticky top-0 z-[100] w-full bg-white">
+                <Navbar scrollToSection={scrollToSection} scrollTargetRef={scrollContainerRef} />
+            </div>
 
-            {/* Hero Section - No wrapper, has its own animation */}
-            <Hero scrollToSection={scrollToSection} />
+            {/* Main Content Area */}
+            <main className="relative w-full">
+                {/* Hero Section */}
+                <Hero scrollToSection={scrollToSection} />
 
-            {/* Social Proof Strip - IMMEDIATE TRUST */}
-            <SocialProofStrip />
+                {/* Social Proof Strip */}
+                <SocialProofStrip />
 
-            {/* High-Conversion Flow - Subtle entrance animations */}
-            <SectionWrapper><WhoWeHelp /></SectionWrapper>
-            <SectionWrapper><Services /></SectionWrapper>
-            <SectionWrapper><Process /></SectionWrapper>
-            <SectionWrapper><WhyChoose /></SectionWrapper>
-            <SectionWrapper><AboutUsSection /></SectionWrapper>
-            <SectionWrapper><CaseStudies /></SectionWrapper>
-            <SectionWrapper><GoogleReviews /></SectionWrapper>
-            <SectionWrapper><VideoTestimonials /></SectionWrapper>
-            <SectionWrapper><Awards /></SectionWrapper>
+                {/* High-Conversion Flow */}
+                <SectionWrapper><WhoWeHelp /></SectionWrapper>
+                <SectionWrapper><Services /></SectionWrapper>
+                <SectionWrapper><Process /></SectionWrapper>
+                <SectionWrapper><WhyChoose /></SectionWrapper>
+                <SectionWrapper><AboutUsSection /></SectionWrapper>
+                <SectionWrapper><CaseStudies /></SectionWrapper>
+                <SectionWrapper><GoogleReviews /></SectionWrapper>
+                <SectionWrapper><VideoTestimonials /></SectionWrapper>
+                <SectionWrapper><Awards /></SectionWrapper>
 
-            {/* Blog - Minimized (SEO only) */}
-            <SectionWrapper><Blog /></SectionWrapper>
+                {/* Blog */}
+                <SectionWrapper><Blog /></SectionWrapper>
 
-            {/* FAQ - Address Objections */}
-            <SectionWrapper><FAQ /></SectionWrapper>
+                {/* FAQ */}
+                <SectionWrapper><FAQ /></SectionWrapper>
 
-            {/* Final CTA */}
-            <SectionWrapper><FinalCTA /></SectionWrapper>
+                {/* Final CTA */}
+                <SectionWrapper><FinalCTA /></SectionWrapper>
 
-            {/* Sticky CTA with smooth slide-up animation */}
+                <TopBar />
+                <Footer scrollToSection={scrollToSection} />
+            </main>
+
+            {/* Sticky CTA takes its own space at the bottom when visible */}
             <AnimatePresence>
                 {isStickyCTAVisible && (
                     <motion.div
-                        initial={{ y: 100, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: 100, opacity: 0 }}
-                        transition={{
-                            duration: 0.4
-                        }}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.4 }}
+                        className="sticky bottom-0 z-50 w-full bg-white border-t border-gray-100"
                     >
                         <StickyCTA />
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            <TopBar />
-            <Footer scrollToSection={scrollToSection} />
-
-            {/* WhatsApp Button - Hidden when footer is in view */}
-            {!isFooterInView && <WhatsAppButton />}
+            {/* WhatsApp Button - Positioned fixed to the screen */}
+            <div className={`fixed bottom-8 right-6 z-[60] transition-opacity duration-300 ${isFooterInView ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+                <WhatsAppButton />
+            </div>
         </div>
     );
 };

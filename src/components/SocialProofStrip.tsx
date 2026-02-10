@@ -13,9 +13,9 @@ const SocialProofStrip: React.FC = () => {
                         </div>
                         <div className="text-left">
                             <div className="font-black text-gray-900 text-lg">
-                                <AnimatedCounter value={79} suffix=" Google Reviews" />
+                                <AnimatedCounter value={80} suffix="+ Google Reviews" />
                             </div>
-                            <div className="text-gray-500 text-sm font-medium">4.9/5.0 Average Rating</div>
+                            <div className="text-gray-500 text-sm font-medium">5.0/5.0 Average Rating</div>
                         </div>
                     </div>
 

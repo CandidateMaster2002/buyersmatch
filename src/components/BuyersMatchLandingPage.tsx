@@ -104,13 +104,8 @@ const BuyersMatchLandingPage = () => {
 
             {/* Main Content Area */}
             <main className="relative w-full">
-                {/* Hero Section */}
                 <Hero scrollToSection={scrollToSection} />
-
-                {/* Social Proof Strip */}
                 <SocialProofStrip />
-
-                {/* High-Conversion Flow */}
                 <SectionWrapper><WhoWeHelp /></SectionWrapper>
                 <SectionWrapper><Services /></SectionWrapper>
                 <SectionWrapper><Process /></SectionWrapper>
@@ -120,16 +115,9 @@ const BuyersMatchLandingPage = () => {
                 <SectionWrapper><GoogleReviews /></SectionWrapper>
                 <SectionWrapper><VideoTestimonials /></SectionWrapper>
                 <SectionWrapper><Awards /></SectionWrapper>
-
-                {/* Blog */}
-                <SectionWrapper><Blog /></SectionWrapper>
-
-                {/* FAQ */}
                 <SectionWrapper><FAQ /></SectionWrapper>
-
-                {/* Final CTA */}
+                <SectionWrapper><Blog /></SectionWrapper>
                 <SectionWrapper><FinalCTA /></SectionWrapper>
-
                 <TopBar />
                 <Footer scrollToSection={scrollToSection} />
             </main>

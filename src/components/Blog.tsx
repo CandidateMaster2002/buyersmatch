@@ -1,24 +1,47 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { siteConfig } from '../config/site';
 import AnimatedText from './AnimatedText';
 
 const Blog: React.FC = () => {
     const navigate = useNavigate();
 
+    // Duplicate the blogs to ensure a smooth infinite loop
+    const loopedBlogs = [...siteConfig.blogs, ...siteConfig.blogs, ...siteConfig.blogs];
+
     return (
-        <section id="blogs" className="py-24 px-4 bg-[#e8f7f7] scroll-mt-24">
-            <div className="container mx-auto">
-                <div className="text-center mb-16">
+        <section id="blogs" className="py-24 bg-[#e8f7f7] scroll-mt-24 overflow-hidden">
+            <div className="container mx-auto px-4 mb-16">
+                <div className="text-center">
                     <AnimatedText
                         text="Expert Insights & News"
                         className="text-4xl md:text-6xl font-black text-gray-900"
                     />
                 </div>
+            </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {siteConfig.blogs.map((blog: any) => (
-                        <div key={blog.id} className="group bg-white rounded-[2rem] overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-300 flex flex-col">
+            {/* Scrolling Container */}
+            <div className="relative group">
+                <motion.div
+                    className="flex gap-8 px-4"
+                    animate={{
+                        x: [0, -1600], // 4 cards * (380px width + 32px gap) = ~1648px, adjusting for visual loop
+                    }}
+                    transition={{
+                        x: {
+                            repeat: Infinity,
+                            repeatType: "loop",
+                            duration: 45,
+                            ease: "linear",
+                        },
+                    }}
+                >
+                    {loopedBlogs.map((blog: any, index: number) => (
+                        <div
+                            key={`${blog.id}-${index}`}
+                            className="flex-shrink-0 w-[380px] group bg-white rounded-[2.5rem] overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-300 flex flex-col"
+                        >
                             {/* Image Section */}
                             <div className="aspect-[16/10] bg-gray-100 flex items-center justify-center relative overflow-hidden">
                                 <img
@@ -35,12 +58,12 @@ const Blog: React.FC = () => {
                                 <h3 className="text-xl font-black mb-4 text-gray-900 leading-tight group-hover:text-[#29b8bd] transition-colors line-clamp-2">
                                     {blog.title}
                                 </h3>
-                                <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
+                                <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3 font-medium">
                                     {blog.excerpt}
                                 </p>
                                 <button
                                     onClick={() => navigate(`/blog/${blog.id}`)}
-                                    className="mt-auto w-full py-3 rounded-xl border-2 border-gray-100 font-bold text-[#29b8bd] hover:bg-[#29b8bd] hover:text-white hover:border-[#29b8bd] transition-all duration-300 flex items-center justify-center group/btn"
+                                    className="mt-auto w-full py-4 rounded-xl border-2 border-gray-100 font-bold text-[#29b8bd] hover:bg-[#29b8bd] hover:text-white hover:border-[#29b8bd] transition-all duration-300 flex items-center justify-center group/btn"
                                 >
                                     Read Full Story
                                     <svg className="w-4 h-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -50,16 +73,11 @@ const Blog: React.FC = () => {
                             </div>
                         </div>
                     ))}
-                </div>
+                </motion.div>
 
-                {/* <div className="mt-16 text-center">
-                    <button
-                        onClick={() => navigate('/blogs')}
-                        className="px-10 py-4 rounded-2xl bg-gray-900 text-white font-black hover:bg-[#29b8bd] transition-all duration-300 shadow-xl shadow-gray-200"
-                    >
-                        View All Articles
-                    </button>
-                </div> */}
+                {/* Gradient Fades */}
+                <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#e8f7f7] to-transparent z-10 pointer-events-none"></div>
+                <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#e8f7f7] to-transparent z-10 pointer-events-none"></div>
             </div>
         </section>
     );

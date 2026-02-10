@@ -37,59 +37,115 @@ const SectionWrapper = ({ children }: { children: React.ReactNode }) => (
 const BuyersMatchLandingPage = () => {
     const [isStickyCTAVisible, setIsStickyCTAVisible] = useState(false);
     const [isFooterInView, setIsFooterInView] = useState(false);
+    const [isFinalCTAInView, setIsFinalCTAInView] = useState(false);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const handleScroll = (e: Event) => {
             const target = e.target as HTMLDivElement;
             const scrollPosition = target.scrollTop;
-            const threshold = 400;
+            const threshold = 100; // Lower threshold to show sticky CTA earlier
 
-            // Check if final-cta is in view manually since we're in a custom scroll container
-            const finalCta = document.getElementById('final-cta');
-            let isFinalCtaVisible = false;
-            if (finalCta) {
-                const rect = finalCta.getBoundingClientRect();
-                // Only hide if we can see a good chunk of the final CTA (e.g., top is 30% up the screen)
-                isFinalCtaVisible = rect.top < (window.innerHeight * 0.7);
+            // Sticky CTA is visible if scanned past threshold AND final CTA is NOT visible
+            // We use the state tracked by IntersectionObserver for FinalCTA
+            if (!isFinalCTAInView) {
+                setIsStickyCTAVisible(scrollPosition > threshold);
+            } else {
+                setIsStickyCTAVisible(false);
             }
-
-            setIsStickyCTAVisible(scrollPosition > threshold && !isFinalCtaVisible);
         };
-
-        const footerObserver = new IntersectionObserver(
-            ([entry]) => {
-                setIsFooterInView(entry.isIntersecting);
-            },
-            {
-                root: scrollContainerRef.current,
-                threshold: 0.1,
-            }
-        );
-
-        const footerElement = document.querySelector('footer');
-
-        if (footerElement) {
-            footerObserver.observe(footerElement);
-        }
 
         const scrollContainer = scrollContainerRef.current;
         if (scrollContainer) {
             scrollContainer.addEventListener('scroll', handleScroll);
         }
 
+        // Observer for Footer (WhatsApp button visibility)
+        const footerObserver = new IntersectionObserver(
+            ([entry]) => {
+                setIsFooterInView(entry.isIntersecting);
+            },
+            {
+                root: scrollContainer,
+                threshold: 0.1,
+            }
+        );
+
+        // Observer for FinalCTA (Sticky CTA visibility)
+        const finalCTAObserver = new IntersectionObserver(
+            ([entry]) => {
+                const isVisible = entry.isIntersecting;
+                setIsFinalCTAInView(isVisible);
+
+                // Immediate update based on Intersection to avoid lag
+                if (isVisible) {
+                    setIsStickyCTAVisible(false);
+                } else if (scrollContainer && scrollContainer.scrollTop > 100) {
+                    setIsStickyCTAVisible(true);
+                }
+            },
+            {
+                root: scrollContainer,
+                threshold: 0.1, // Trigger as soon as 10% is visible
+                rootMargin: "0px 0px -100px 0px" // Trigger slightly before it hits bottom
+            }
+        );
+
+        const footerElement = document.querySelector('footer');
+        const finalCTAElement = document.getElementById('final-cta');
+
+        if (footerElement) footerObserver.observe(footerElement);
+        if (finalCTAElement) finalCTAObserver.observe(finalCTAElement);
+
         return () => {
             if (scrollContainer) {
                 scrollContainer.removeEventListener('scroll', handleScroll);
             }
             if (footerElement) footerObserver.unobserve(footerElement);
+            if (finalCTAElement) finalCTAObserver.unobserve(finalCTAElement);
         };
-    }, []);
+    }, [isFinalCTAInView]); // Re-run effect if isFinalCTAInView changes to update scroll listener logic if needed, actually cleaner not to depend on it in scroll listener but use ref or state in closure? 
+    // Effect dependency: the scroll listener uses `isFinalCTAInView` from closure. 
+    // Better to use a ref for isFinalCTAInView or keep it simple. 
+    // Let's rely on the observer callback to set visibility mostly, and scroll listener for top threshold.
+
+    // Correct logic:
+    // We need the scroll listener to know `isFinalCTAInView` current value.
+    // Since `handleScroll` is defined in useEffect, it captures the initial state.
+    // We should use a ref for `isFinalCTAInView` to access fresh value in `handleScroll`.
+
+    // BUT, instead of complex ref, let's keep it simple: 
+    // The previous logic was failing because manual calculation was flaky.
+    // New logic: 
+    // 1. Scroll > 100 -> potential SHOW.
+    // 2. FinalCTA visible -> FORCE HIDE.
+
+    // I will rewrite the component slightly to use a Ref for `isFinalCTAInView` so `handleScroll` can read it without re-binding.
 
     const scrollToSection = (id: string) => {
         const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const container = scrollContainerRef.current;
+
+        if (element && container) {
+            // Calculate position manually to account for sticky header
+            const elementRect = element.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+
+            // Current scroll position
+            const currentScrollTop = container.scrollTop;
+
+            // Distance from top of container to element
+            const relativeTop = elementRect.top - containerRect.top;
+
+            // Desired Offset: Navbar height (approx 80px) + Extra 20px breathing room
+            const offset = 100;
+
+            const targetScrollTop = currentScrollTop + relativeTop - offset;
+
+            container.scrollTo({
+                top: targetScrollTop,
+                behavior: 'smooth'
+            });
         }
     };
 

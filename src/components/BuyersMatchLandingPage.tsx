@@ -43,14 +43,15 @@ const BuyersMatchLandingPage = () => {
         const handleScroll = (e: Event) => {
             const target = e.target as HTMLDivElement;
             const scrollPosition = target.scrollTop;
-            const threshold = 600;
+            const threshold = 400;
 
             // Check if final-cta is in view manually since we're in a custom scroll container
             const finalCta = document.getElementById('final-cta');
             let isFinalCtaVisible = false;
             if (finalCta) {
                 const rect = finalCta.getBoundingClientRect();
-                isFinalCtaVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+                // Only hide if we can see a good chunk of the final CTA (e.g., top is 30% up the screen)
+                isFinalCtaVisible = rect.top < (window.innerHeight * 0.7);
             }
 
             setIsStickyCTAVisible(scrollPosition > threshold && !isFinalCtaVisible);

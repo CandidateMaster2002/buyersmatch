@@ -12,7 +12,7 @@ const StickyCTA: React.FC<StickyCTAProps> = () => {
             <div className="max-w-4xl mx-auto flex flex-row items-center justify-between gap-3 md:gap-6">
                 {/* Left: Connect on Call */}
                 <a
-                    href={`tel:${siteConfig.contact.phones[0].replace(/\s+/g, '')}`}
+                    href={`tel:${siteConfig.contact.phones[0].replace(/[^0-9+]/g, '')}`}
                     className="flex items-center space-x-2 md:space-x-3 group no-underline"
                 >
                     <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-[#29b8bd]/10 flex items-center justify-center group-hover:bg-[#29b8bd] group-hover:rotate-12 transition-all duration-300 shadow-sm">

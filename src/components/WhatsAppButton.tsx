@@ -3,7 +3,8 @@ import { siteConfig } from '../config/site';
 
 const WhatsAppButton: React.FC = () => {
     // Primary phone number for WhatsApp
-    const phoneNumber = siteConfig.contact.phones[0].replace(/\s+/g, '');
+    // Primary phone number for WhatsApp - wash the number to just digits
+    const phoneNumber = siteConfig.contact.phones[0].replace(/\D/g, '');
     const whatsappUrl = `https://wa.me/${phoneNumber}`;
 
     return (

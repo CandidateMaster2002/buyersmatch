@@ -29,7 +29,7 @@ const TopBar: React.FC<TopBarProps> = ({ className = '' }) => {
                         <span className="w-1.5 h-1.5 rounded-full bg-[#29b8bd] mr-3 animate-pulse shadow-[0_0_8px_#29b8bd]"></span>
                         {siteConfig.contact.email}
                     </a>
-                    <a href={`tel:${siteConfig.contact.phones[0]}`} className="hidden md:flex items-center text-gray-400 hover:text-white transition-all duration-300">
+                    <a href={`tel:${siteConfig.contact.phones[0].replace(/[^0-9+]/g, '')}`} className="flex items-center text-gray-400 hover:text-white transition-all duration-300">
                         <span className="w-1.5 h-1.5 rounded-full bg-gray-600 mr-3 group-hover:bg-white transition-all"></span>
                         {siteConfig.contact.phones[0]}
                     </a>

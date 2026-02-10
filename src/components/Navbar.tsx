@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { siteConfig } from '../config/site';
 import { openCalendlyPopup } from '../utils/calendly';
 import TopBar from './TopBar';
@@ -13,6 +14,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ scrollToSection, scrollTargetRef }) => {
     const [activeSection, setActiveSection] = useState<string>('');
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = (e: Event) => {
@@ -51,6 +53,11 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, scrollTargetRef }) => 
         };
     }, [scrollTargetRef]);
 
+    const handleMobileNavClick = (id: string) => {
+        scrollToSection(id);
+        setIsMobileMenuOpen(false);
+    };
+
     return (
         <header className="relative z-[100] w-full bg-white">
             {/* Top Bar Header */}
@@ -59,7 +66,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, scrollTargetRef }) => 
             {/* Main Navbar */}
             <nav className={`transition-all duration-300 ${isScrolled ? 'bg-white/90 shadow-lg py-0' : 'bg-white py-0'
                 }`}>
-                <div className="container mx-auto px-4">
+                <div className="container mx-auto px-4 relative">
                     <div className="flex items-center justify-between">
                         {/* Logo */}
                         <div
@@ -80,7 +87,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, scrollTargetRef }) => 
                             />
                         </div>
 
-                        {/* Navigation Links */}
+                        {/* Navigation Links (Desktop) */}
                         <div className="hidden lg:flex items-center space-x-1 bg-gray-100/50 backdrop-blur-sm p-1 rounded-2xl">
                             {siteConfig.navigation.map((item) => (
                                 <button
@@ -99,7 +106,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, scrollTargetRef }) => 
                             ))}
                         </div>
 
-                        {/* CTA Button */}
+                        {/* CTA Button (Desktop) */}
                         <div className="hidden md:flex items-center space-x-4">
                             <button
                                 onClick={openCalendlyPopup}
@@ -110,13 +117,59 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, scrollTargetRef }) => 
                         </div>
 
                         {/* Mobile Menu Button */}
-                        <button className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-gray-100 text-gray-900">
+                        <button
+                            className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-gray-100 text-gray-900 hover:bg-gray-200 transition-colors"
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            aria-label="Toggle mobile menu"
+                        >
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                                {isMobileMenuOpen ? (
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                ) : (
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                                )}
                             </svg>
                         </button>
                     </div>
                 </div>
+
+                {/* Mobile Menu Dropdown */}
+                <AnimatePresence>
+                    {isMobileMenuOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="lg:hidden bg-white border-t border-gray-100 overflow-hidden shadow-xl"
+                        >
+                            <div className="flex flex-col p-4 space-y-4 container mx-auto">
+                                {siteConfig.navigation.map((item) => (
+                                    <button
+                                        key={item.id}
+                                        onClick={() => handleMobileNavClick(item.id)}
+                                        className={`text-left px-4 py-3 text-base font-bold rounded-xl transition-all duration-300 capitalize ${activeSection === item.id
+                                            ? 'bg-gray-50 text-[#29b8bd]'
+                                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                                            }`}
+                                    >
+                                        {item.label}
+                                    </button>
+                                ))}
+                                <div className="pt-2 border-t border-gray-100">
+                                    <button
+                                        onClick={() => {
+                                            openCalendlyPopup();
+                                            setIsMobileMenuOpen(false);
+                                        }}
+                                        className="w-full px-6 py-3 bg-[#29b8bd] text-white font-black rounded-xl transition-all duration-300 hover:bg-[#229ea3] active:scale-95 shadow-md text-sm uppercase tracking-wider"
+                                    >
+                                        Get Started
+                                    </button>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </nav>
         </header>
     );

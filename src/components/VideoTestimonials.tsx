@@ -1,34 +1,31 @@
-import React, { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
 import { siteConfig } from '../config/site';
 import AnimatedText from './AnimatedText';
 import VideoModal from './VideoModal';
 
-const ANIMATION_X = [0, -11264];
-
 const VideoTestimonials: React.FC = () => {
     const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
 
-    // Use useMemo to prevent re-calculating and triggering re-renders of the list
-    const doubledTestimonials = useMemo(() =>
-        [...siteConfig.videoTestimonials, ...siteConfig.videoTestimonials],
-        []);
-
-    const animationProps = useMemo(() => ({
-        x: ANIMATION_X,
-    }), []);
-
-    const transitionProps = useMemo(() => ({
-        x: {
-            repeat: Infinity,
-            repeatType: "loop" as const,
-            duration: 180,
-            ease: "linear",
-        },
-    }), []);
+    // Duplicate the array to create a seamless infinite loop
+    const doubledTestimonials = [...siteConfig.videoTestimonials, ...siteConfig.videoTestimonials];
 
     return (
         <section id="video-testimonials" className="py-24 px-4 bg-[#e8f7f7] scroll-mt-24 overflow-hidden">
+            <style>{`
+                @keyframes marquee {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-11264px); }
+                }
+                .marquee-container {
+                    display: flex;
+                    width: max-content;
+                    animation: marquee 160s linear infinite;
+                }
+                .marquee-container:hover {
+                    animation-play-state: paused;
+                }
+            `}</style>
+
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
                     <AnimatedText
@@ -40,11 +37,7 @@ const VideoTestimonials: React.FC = () => {
 
             {/* Infinite Horizontal Animation Container */}
             <div className="relative flex overflow-hidden group">
-                <motion.div
-                    className="flex space-x-8 whitespace-nowrap"
-                    animate={animationProps}
-                    transition={transitionProps}
-                >
+                <div className="marquee-container space-x-8">
                     {doubledTestimonials.map((video, index) => (
                         <div key={`${video.id}-${index}`} className="flex-shrink-0 w-80">
                             <div className="relative aspect-[9/16] bg-gray-100 rounded-[2.5rem] overflow-hidden shadow-xl transition-all duration-500 hover:scale-[1.05] hover:shadow-[#29b8bd]/20">
@@ -72,11 +65,11 @@ const VideoTestimonials: React.FC = () => {
                             </div>
                         </div>
                     ))}
-                </motion.div>
+                </div>
 
                 {/* Left/Right Overlays to fade the edges */}
-                <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#e8f7f7] to-transparent z-10 pointer-events-none"></div>
-                <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#e8f7f7] to-transparent z-10 pointer-events-none"></div>
+                <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#e8f7f7] to-transparent z-20 pointer-events-none"></div>
+                <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#e8f7f7] to-transparent z-20 pointer-events-none"></div>
             </div>
 
             <VideoModal

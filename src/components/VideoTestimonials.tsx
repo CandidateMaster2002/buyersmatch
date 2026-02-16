@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { siteConfig } from '../config/site';
 import AnimatedText from './AnimatedText';
 import VideoModal from './VideoModal';
@@ -11,21 +12,6 @@ const VideoTestimonials: React.FC = () => {
 
     return (
         <section id="video-testimonials" className="py-24 px-4 bg-[#e8f7f7] scroll-mt-24 overflow-hidden">
-            <style>{`
-                @keyframes marquee {
-                    0% { transform: translateX(0); }
-                    100% { transform: translateX(-11264px); }
-                }
-                .marquee-container {
-                    display: flex;
-                    width: max-content;
-                    animation: marquee 160s linear infinite;
-                }
-                .marquee-container:hover {
-                    animation-play-state: paused;
-                }
-            `}</style>
-
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
                     <AnimatedText
@@ -36,17 +22,35 @@ const VideoTestimonials: React.FC = () => {
             </div>
 
             {/* Infinite Horizontal Animation Container */}
-            <div className="relative flex overflow-hidden group">
-                <div className="marquee-container space-x-8">
+            <div className="relative flex overflow-hidden group cursor-grab active:cursor-grabbing px-4">
+                <motion.div
+                    className="flex gap-8"
+                    drag="x"
+                    dragConstraints={{ right: 0, left: -5000 }}
+                    animate={{
+                        x: [0, -3200],
+                    }}
+                    transition={{
+                        x: {
+                            repeat: Infinity,
+                            repeatType: "loop",
+                            duration: 100,
+                            ease: "linear",
+                        },
+                    }}
+                    whileHover={{ transition: { duration: 0 } }}
+                    whileDrag={{ transition: { duration: 0 } }}
+                >
                     {doubledTestimonials.map((video, index) => (
-                        <div key={`${video.id}-${index}`} className="flex-shrink-0 w-80">
+                        <div key={`${video.id}-${index}`} className="flex-shrink-0 w-80 pointer-events-none group-active:pointer-events-none">
                             <div className="relative aspect-[9/16] bg-gray-100 rounded-[2.5rem] overflow-hidden shadow-xl transition-all duration-500 hover:scale-[1.05] hover:shadow-[#29b8bd]/20">
                                 <img
                                     src={video.image}
                                     alt={video.name}
-                                    className="absolute inset-0 w-full h-full object-cover"
+                                    className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
+                                    onDragStart={(e) => e.preventDefault()}
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 text-white">
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 text-white pointer-events-auto">
                                     <div
                                         className="bg-[#29b8bd] w-14 h-14 rounded-full flex items-center justify-center mb-6 cursor-pointer hover:scale-110 transition-transform shadow-lg border-4 border-white/20"
                                         onClick={() => setSelectedVideoId(video.youtubeId || null)}
@@ -65,7 +69,7 @@ const VideoTestimonials: React.FC = () => {
                             </div>
                         </div>
                     ))}
-                </div>
+                </motion.div>
 
                 {/* Left/Right Overlays to fade the edges */}
                 <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#e8f7f7] to-transparent z-20 pointer-events-none"></div>

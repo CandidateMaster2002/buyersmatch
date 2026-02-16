@@ -24,30 +24,35 @@ const CaseStudies: React.FC = () => {
             </div>
 
             {/* Scrolling Container */}
-            <div className="relative group">
+            <div className="relative group cursor-grab active:cursor-grabbing overflow-hidden">
                 <motion.div
                     className="flex gap-8 px-4"
+                    drag="x"
+                    dragConstraints={{ right: 0, left: -2400 }}
                     animate={{
-                        x: [0, -1200], // Adjust based on total width of one set (3 cards * 400px gaps)
+                        x: [0, -1200],
                     }}
                     transition={{
                         x: {
                             repeat: Infinity,
                             repeatType: "loop",
-                            duration: 40,
+                            duration: 50,
                             ease: "linear",
                         },
                     }}
+                    whileHover={{ transition: { duration: 0 } }}
+                    whileDrag={{ transition: { duration: 0 } }}
                 >
                     {loopedStories.map((story: any, index: number) => {
                         const imageIndex = index % storyImages.length;
                         return (
-                            <div key={index} className="flex-shrink-0 w-[400px] bg-white rounded-[2.5rem] overflow-hidden shadow-xl border border-gray-100 group/card transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl">
-                                <div className="h-64 bg-gray-200 relative overflow-hidden">
+                            <div key={index} className="flex-shrink-0 w-[400px] bg-white rounded-[2.5rem] overflow-hidden shadow-xl border border-gray-100 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl pointer-events-none group-active:pointer-events-none">
+                                <div className="h-64 bg-gray-200 relative overflow-hidden pointer-events-none">
                                     <img
                                         src={storyImages[imageIndex]}
                                         alt={`${story.state} Property`}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
+                                        className="w-full h-full object-cover transition-transform duration-700 pointer-events-none select-none"
+                                        onDragStart={(e) => e.preventDefault()}
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                                     <div className="absolute bottom-4 left-6">
@@ -57,7 +62,7 @@ const CaseStudies: React.FC = () => {
                                         {story.status}
                                     </div>
                                 </div>
-                                <div className="p-10">
+                                <div className="p-10 pointer-events-auto">
                                     <div className="grid grid-cols-2 gap-8">
                                         <div>
                                             <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Purchase Price</div>

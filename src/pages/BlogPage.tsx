@@ -3,11 +3,16 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { siteConfig } from '../config/site';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { blogsData } from '../config/blogs';
 
 const BlogPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
-    const blog = siteConfig.blogs.find(b => b.id === id);
+
+    // Find basic info from siteConfig
+    const blogInfo = siteConfig.blogs.find(b => b.id === id);
+    // Find detailed content from blogsData
+    const detailedBlog = id ? blogsData[id] : null;
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -17,7 +22,7 @@ const BlogPage: React.FC = () => {
         navigate(`/#${id}`);
     };
 
-    if (!blog) {
+    if (!blogInfo) {
         return <div className="p-20 text-center">Blog post not found.</div>;
     }
 
@@ -38,35 +43,53 @@ const BlogPage: React.FC = () => {
                     </button>
 
                     <div className="mb-12">
-                        <div className="text-[#29b8bd] font-black mb-4 uppercase tracking-[0.2em] text-sm">{blog.date}</div>
+                        <div className="text-[#29b8bd] font-black mb-4 uppercase tracking-[0.2em] text-sm">{blogInfo.date}</div>
                         <h1 className="text-4xl md:text-6xl font-black text-gray-900 leading-tight mb-8">
-                            {blog.title}
+                            {blogInfo.title}
                         </h1>
-                        <div className="w-full aspect-video bg-gray-100 rounded-[3rem] flex items-center justify-center text-[10rem] mb-12 shadow-2xl">
-                            {blog.image}
+                        <div className="w-full aspect-video bg-gray-100 rounded-[3rem] overflow-hidden shadow-2xl mb-12">
+                            <img
+                                src={blogInfo.image}
+                                alt={blogInfo.title}
+                                className="w-full h-full object-cover"
+                            />
                         </div>
                     </div>
 
                     <div className="prose prose-xl prose-gray max-w-none">
                         <p className="text-2xl text-gray-600 font-medium leading-relaxed mb-12 italic">
-                            "{blog.excerpt}"
+                            "{blogInfo.excerpt}"
                         </p>
+
                         <div className="space-y-8 text-lg text-gray-700 leading-relaxed">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </p>
-                            <p>
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                            <h2 className="text-3xl font-black text-gray-900 mt-12 mb-6">Key Takeaways</h2>
-                            <ul className="list-disc pl-6 space-y-4">
-                                <li>Strategy over guessing: How to use data to your advantage.</li>
-                                <li>The importance of networking with local agents.</li>
-                                <li>Risk mitigation through thorough due diligence.</li>
-                            </ul>
-                            <p>
-                                Curabitur aliquet quam id dui posuere blandit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec rutrum congue leo eget malesuada.
-                            </p>
+                            {detailedBlog?.content ? (
+                                detailedBlog.content.map((section: any, idx: number) => {
+                                    if (section.type === "heading") {
+                                        return <h2 key={idx} className="text-3xl font-black text-gray-900 mt-12 mb-6">{section.text}</h2>;
+                                    }
+                                    if (section.type === "subheading") {
+                                        return <h3 key={idx} className="text-2xl font-bold text-gray-800 mt-8 mb-4">{section.text}</h3>;
+                                    }
+                                    if (section.type === "paragraph") {
+                                        return <p key={idx}>{section.text}</p>;
+                                    }
+                                    if (section.type === "list") {
+                                        return (
+                                            <ul key={idx} className="list-disc pl-6 space-y-4 my-6">
+                                                {section.items.map((item: string, i: number) => (
+                                                    <li key={i}>{item}</li>
+                                                ))}
+                                            </ul>
+                                        );
+                                    }
+                                    return null;
+                                })
+                            ) : (
+                                <div className="space-y-8">
+                                    <p>Content is being updated. Please check back soon.</p>
+                                    <p>Our team is working on bringing the full version of this property guide to you.</p>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

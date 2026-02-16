@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { siteConfig } from '../config/site';
 import VideoModal from './VideoModal';
 
@@ -45,15 +46,25 @@ const Testimonials: React.FC = () => {
 
                     {/* Right Review Cards Section */}
                     <div className="w-full lg:w-3/4 relative">
-                        <div className="relative overflow-hidden">
-                            <div
-                                className="flex transition-transform duration-500 ease-out"
-                                style={{ transform: `translateX(-${currentIndex * 33.333}%)` }}
+                        <div className="relative overflow-hidden cursor-grab active:cursor-grabbing">
+                            <motion.div
+                                className="flex"
+                                drag="x"
+                                dragConstraints={{ left: 0, right: 0 }}
+                                onDragEnd={(_, info) => {
+                                    const swipeThreshold = 50;
+                                    if (info.offset.x < -swipeThreshold) {
+                                        nextSlide();
+                                    } else if (info.offset.x > swipeThreshold) {
+                                        prevSlide();
+                                    }
+                                }}
+                                animate={{ x: `-${currentIndex * (100 / (window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1))}%` }}
+                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
                             >
                                 {siteConfig.reviews.map((review, index) => (
-                                    <div key={index} className="w-full min-w-full md:min-w-[50%] lg:min-w-[33.333%] px-3">
-                                        <div className="bg-[#f4f4f4] rounded-2xl p-6 h-full flex flex-col items-start relative border border-white/50">
-
+                                    <div key={index} className="w-full min-w-full md:min-w-[50%] lg:min-w-[33.333%] px-3 pointer-events-none group-active:pointer-events-none">
+                                        <div className="bg-[#f4f4f4] rounded-2xl p-6 h-full flex flex-col items-start relative border border-white/50 pointer-events-auto">
                                             {/* Card Header */}
                                             <div className="flex items-center w-full mb-4">
                                                 <div className="w-12 h-12 rounded-full overflow-hidden bg-[#29b8bd] flex items-center justify-center text-white font-bold text-xl uppercase mr-3">
@@ -64,7 +75,6 @@ const Testimonials: React.FC = () => {
                                                     <span className="text-xs text-gray-500">{review.date}</span>
                                                 </div>
                                                 <div className="ml-auto">
-                                                    {/* Google Icon Placeholder */}
                                                     <svg className="w-5 h-5" viewBox="0 0 24 24">
                                                         <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
                                                         <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
@@ -90,20 +100,17 @@ const Testimonials: React.FC = () => {
                                                 </div>
                                             </div>
 
-                                            {/* Review Text */}
                                             <p className="text-gray-700 text-sm leading-relaxed mb-4 line-clamp-4">
                                                 {review.text}
                                             </p>
 
-                                            {/* Read More */}
                                             <button className="mt-auto text-xs font-bold text-gray-500 hover:text-gray-900 transition-colors uppercase tracking-wider">
                                                 Read more
                                             </button>
-
                                         </div>
                                     </div>
                                 ))}
-                            </div>
+                            </motion.div>
                         </div>
 
                         {/* Navigation Buttons */}

@@ -22,39 +22,44 @@ const Blog: React.FC = () => {
             </div>
 
             {/* Scrolling Container */}
-            <div className="relative group">
+            <div className="relative group cursor-grab active:cursor-grabbing overflow-hidden">
                 <motion.div
                     className="flex gap-8 px-4"
+                    drag="x"
+                    dragConstraints={{ right: 0, left: -2400 }}
                     animate={{
-                        x: [0, -1600], // 4 cards * (380px width + 32px gap) = ~1648px, adjusting for visual loop
+                        x: [0, -1600],
                     }}
                     transition={{
                         x: {
                             repeat: Infinity,
                             repeatType: "loop",
-                            duration: 45,
+                            duration: 60,
                             ease: "linear",
                         },
                     }}
+                    whileHover={{ transition: { duration: 0 } }}
+                    whileDrag={{ transition: { duration: 0 } }}
                 >
                     {loopedBlogs.map((blog: any, index: number) => (
                         <div
                             key={`${blog.id}-${index}`}
-                            className="flex-shrink-0 w-[380px] group bg-white rounded-[2.5rem] overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-300 flex flex-col"
+                            className="flex-shrink-0 w-[380px] bg-white rounded-[2.5rem] overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-300 flex flex-col pointer-events-none group-active:pointer-events-none"
                         >
                             {/* Image Section */}
-                            <div className="aspect-[16/10] bg-gray-100 flex items-center justify-center relative overflow-hidden">
+                            <div className="aspect-[16/10] bg-gray-100 flex items-center justify-center relative overflow-hidden pointer-events-none">
                                 <img
                                     src={blog.image}
                                     alt={blog.title}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    className="w-full h-full object-cover transition-transform duration-700 pointer-events-none select-none"
+                                    onDragStart={(e) => e.preventDefault()}
                                 />
                                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-gray-500">
                                     {blog.date}
                                 </div>
                             </div>
 
-                            <div className="p-8 flex flex-col flex-grow">
+                            <div className="p-8 flex flex-col flex-grow pointer-events-auto">
                                 <h3 className="text-xl font-black mb-4 text-gray-900 leading-tight group-hover:text-[#29b8bd] transition-colors line-clamp-2">
                                     {blog.title}
                                 </h3>
@@ -78,6 +83,21 @@ const Blog: React.FC = () => {
                 {/* Gradient Fades */}
                 <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#e8f7f7] to-transparent z-10 pointer-events-none"></div>
                 <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#e8f7f7] to-transparent z-10 pointer-events-none"></div>
+            </div>
+
+            {/* View All Button */}
+            <div className="container mx-auto px-4 mt-20 text-center">
+                <button
+                    onClick={() => navigate('/blogs')}
+                    className="inline-flex items-center px-10 py-5 bg-white text-[#29b8bd] font-black rounded-3xl border-2 border-[#29b8bd]/10 hover:border-[#29b8bd] hover:shadow-2xl hover:shadow-[#29b8bd]/20 transition-all duration-300 group"
+                >
+                    View All Articles
+                    <div className="ml-4 w-10 h-10 bg-[#29b8bd] text-white rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </div>
+                </button>
             </div>
         </section>
     );

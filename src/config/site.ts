@@ -1,3 +1,5 @@
+import { blogsData } from './blogs';
+
 export const siteConfig = {
     name: "BuyersMatch",
     logoText: "BM",
@@ -98,32 +100,81 @@ export const siteConfig = {
     ],
     blogs: [
         {
-            id: "understanding-off-market-properties",
-            title: "Understanding Off-Market Properties in Australia",
-            image: "https://images.unsplash.com/photo-1582408921715-18e7806365c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            date: "Feb 15, 2024",
-            excerpt: "How to access exclusive deals that never hit the public listing sites."
+            id: "real-estate-portfolio-examples",
+            title: "Real Estate Portfolio Examples: Building Your Strategy",
+            image: blogsData["real-estate-portfolio-examples"].image,
+            date: "Feb 10, 2024",
+            excerpt: "Explore practical examples and strategies for building a diverse and high-performing property investment portfolio."
         },
         {
-            id: "first-home-buyer-guide-2024",
-            title: "First Home Buyer Guide: 2024 Edition",
-            image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            id: "build-portfolio-no-money",
+            title: "How to Build a Property Portfolio with No Money",
+            image: blogsData["build-portfolio-no-money"].image,
+            date: "Feb 05, 2024",
+            excerpt: "Learn creative financing strategies and leverage techniques to start your property journey without significant capital."
+        },
+        {
+            id: "insurance-embargo-qld",
+            title: "Understanding the Insurance Embargo in QLD",
+            image: blogsData["insurance-embargo-qld"].image,
             date: "Jan 28, 2024",
-            excerpt: "Navigating grants, deposits, and market entry strategies for new buyers."
+            excerpt: "A critical guide for property buyers in Queensland regarding natural disaster insurance restrictions and risks."
         },
         {
-            id: "investment-property-yields-explained",
-            title: "Investment Property Yields Explained",
-            image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            date: "Jan 12, 2024",
-            excerpt: "Why gross yield isn't the only metric you should care about as an investor."
+            id: "why-use-buyers-agent",
+            title: "Why should one use a buyer's agent?",
+            image: blogsData["why-use-buyers-agent"].image,
+            date: "Jan 15, 2024",
+            excerpt: "Discover the professional advantages, from off-market access to skilled negotiation, that a buyer's agent brings."
         },
         {
-            id: "the-psychology-of-negotiation",
-            title: "The Psychology of Negotiation in Real Estate",
-            image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            id: "tenanted-properties-wealth",
+            title: "Unlock Wealth with Tenanted Properties",
+            image: blogsData["tenanted-properties-wealth"].image,
+            date: "Jan 08, 2024",
+            excerpt: "Essential tips for investors looking to acquire properties with existing tenants for immediate cash flow."
+        },
+        {
+            id: "strategic-planning-investment",
+            title: "Strategic Planning in Property Investment",
+            image: blogsData["strategic-planning-investment"].image,
+            date: "Dec 15, 2023",
+            excerpt: "Master the long-term planning techniques required to build a sustainable and growing property portfolio."
+        },
+        {
+            id: "thriving-portfolio-scratch",
+            title: "Build a Thriving Property Portfolio from Scratch",
+            image: blogsData["thriving-portfolio-scratch"].image,
             date: "Dec 05, 2023",
-            excerpt: "Mastering the art of closing the deal without overpaying for your dream home."
+            excerpt: "A step-by-step roadmap for new investors to enter the market and scale their property holdings effectively."
+        },
+        {
+            id: "power-of-buyers-agents",
+            title: "Unveiling the Power of Buyers Agents",
+            image: blogsData["power-of-buyers-agents"].image,
+            date: "Nov 22, 2023",
+            excerpt: "How to unlock exclusive off-market opportunities and gain a competitive edge in any market environment."
+        },
+        {
+            id: "investment-sweet-spot",
+            title: "Finding Your Investment Sweet Spot",
+            image: blogsData["investment-sweet-spot"].image,
+            date: "Nov 10, 2023",
+            excerpt: "Learn how to balance capital growth and rental yield to find the perfect property for your specific goals."
+        },
+        {
+            id: "elevating-investment-experience",
+            title: "Elevating Your Property Investment Experience",
+            image: blogsData["elevating-investment-experience"].image,
+            date: "Oct 28, 2023",
+            excerpt: "The distinct advantages of choosing a specialized buyer's agency for your next property purchase."
+        },
+        {
+            id: "insurance-safeguards-investment",
+            title: "Insurance Safeguards for Your Property",
+            image: blogsData["insurance-safeguards-investment"].image,
+            date: "Oct 12, 2023",
+            excerpt: "Protect your assets with 10 essential insurance tips every Melbourne property buyer should know."
         }
     ],
     whoWeHelp: [

@@ -1,32 +1,6 @@
 import React, { useState } from 'react';
 import { siteConfig } from '../config/site';
-
-const VideoModal: React.FC<{ isOpen: boolean; onClose: () => void; videoId: string }> = ({ isOpen, onClose, videoId }) => {
-    if (!isOpen) return null;
-
-    return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm" onClick={onClose}>
-            <div className="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl" onClick={e => e.stopPropagation()}>
-                <button
-                    onClick={onClose}
-                    className="absolute -top-12 right-0 text-white hover:text-[#29b8bd] transition-colors p-2"
-                >
-                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-                <iframe
-                    className="w-full h-full"
-                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                ></iframe>
-            </div>
-        </div>
-    );
-};
+import VideoModal from './VideoModal';
 
 const Testimonials: React.FC = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -155,8 +129,8 @@ const Testimonials: React.FC = () => {
                 {/* Video Testimonials Section (Below Google Reviews) */}
                 <div className="mt-32">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-black mb-4">Client Success Stories</h2>
-                        <p className="text-xl text-gray-500">Real stories from real people who found their perfect match</p>
+                        <h2 className="text-4xl md:text-5xl font-black mb-4">Success Stories</h2>
+                        <p className="text-xl text-gray-500">Real property journeys from our clients</p>
                     </div>
 
                     <div className="flex overflow-x-auto pb-12 space-x-8 scrollbar-hide px-4 mask-fade-edges">
@@ -177,8 +151,8 @@ const Testimonials: React.FC = () => {
                                                 <path d="M8 5v14l11-7z" />
                                             </svg>
                                         </div>
-                                        <h4 className="font-bold text-xl mb-1">{video.name}</h4>
-                                        <p className="text-sm text-gray-100 line-clamp-2">{video.quote}</p>
+                                        <h4 className="font-bold text-lg md:text-xl mb-1 line-clamp-3 leading-tight">{video.name}</h4>
+                                        {video.quote && <p className="text-sm text-gray-100 line-clamp-2">{video.quote}</p>}
                                     </div>
                                 </div>
                             </div>

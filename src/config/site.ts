@@ -25,36 +25,38 @@ export const siteConfig = {
         { id: "faq", label: "FAQ" },
     ],
     videoTestimonials: [
-        {
-            id: 1,
-            name: "Sarah & James",
-            quote: "Found our dream home in 3 weeks!",
-            image: "https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=700&q=80"
-        },
-        {
-            id: 2,
-            name: "Michael Chen",
-            quote: "Investment property with 6.2% yield",
-            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=700&q=80"
-        },
-        {
-            id: 3,
-            name: "Lisa Rodriguez",
-            quote: "Stress-free first home buying",
-            image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=700&q=80"
-        },
-        {
-            id: 4,
-            name: "David Wilson",
-            quote: "Saved us $45,000 on purchase",
-            image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=700&q=80"
-        },
-        {
-            id: 5,
-            name: "Emma Thompson",
-            quote: "Exceptional service, highly recommend",
-            image: "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=700&q=80"
-        },
+        { id: 1, name: "Client Success", quote: "Found the perfect property with expert guidance", youtubeId: "vmZ-wy00s-k", image: "https://img.youtube.com/vi/vmZ-wy00s-k/maxresdefault.jpg" },
+        { id: 2, name: "Client Success", quote: "Strategic negotiation saved us thousands", youtubeId: "X3TZe_DaO5g", image: "https://img.youtube.com/vi/X3TZe_DaO5g/maxresdefault.jpg" },
+        { id: 3, name: "Client Success", quote: "Professional support through the entire journey", youtubeId: "30we2JzIsE8", image: "https://img.youtube.com/vi/30we2JzIsE8/maxresdefault.jpg" },
+        { id: 4, name: "Client Success", quote: "Expert market knowledge and insights", youtubeId: "q3IfD-X7Cf0", image: "https://img.youtube.com/vi/q3IfD-X7Cf0/maxresdefault.jpg" },
+        { id: 5, name: "Client Success", quote: "Transparent and honest communication", youtubeId: "tbkddtd7I_8", image: "https://img.youtube.com/vi/tbkddtd7I_8/maxresdefault.jpg" },
+        { id: 6, name: "Client Success", quote: "Highly recommended for property buyers", youtubeId: "caH8lakaud0", image: "https://img.youtube.com/vi/caH8lakaud0/maxresdefault.jpg" },
+        { id: 7, name: "Client Success", quote: "Exceptional service and dedication", youtubeId: "LSIsyzuSobY", image: "https://img.youtube.com/vi/LSIsyzuSobY/maxresdefault.jpg" },
+        { id: 8, name: "Client Success", quote: "Making property buying stress-free", youtubeId: "5UrWOfea4zA", image: "https://img.youtube.com/vi/5UrWOfea4zA/maxresdefault.jpg" },
+        { id: 9, name: "Client Success", quote: "The best decision for our home search", youtubeId: "-KYMMLq-miQ", image: "https://img.youtube.com/vi/-KYMMLq-miQ/maxresdefault.jpg" },
+        { id: 10, name: "Client Success", quote: "Top-tier negotiation and strategy", youtubeId: "CKQOAuvINdI", image: "https://img.youtube.com/vi/CKQOAuvINdI/maxresdefault.jpg" },
+        { id: 11, name: "Client Success", quote: "Invaluable help in a competitive market", youtubeId: "-9kClkczOeg", image: "https://img.youtube.com/vi/-9kClkczOeg/maxresdefault.jpg" },
+        { id: 12, name: "Client Success", quote: "A seamless property buying experience", youtubeId: "E6Dp_iM07lg", image: "https://img.youtube.com/vi/E6Dp_iM07lg/maxresdefault.jpg" },
+        { id: 13, name: "Client Success", quote: "Patient and thorough property search", youtubeId: "ISsxVHcajes", image: "https://img.youtube.com/vi/ISsxVHcajes/maxresdefault.jpg" },
+        { id: 14, name: "Client Success", quote: "Personalized approach to our needs", youtubeId: "d9HTedtaH74", image: "https://img.youtube.com/vi/d9HTedtaH74/maxresdefault.jpg" },
+        { id: 15, name: "Client Success", quote: "Reliable and expert property advice", youtubeId: "u2KrdsZymoM", image: "https://img.youtube.com/vi/u2KrdsZymoM/maxresdefault.jpg" },
+        { id: 16, name: "Client Success", quote: "Found our dream home faster than expected", youtubeId: "EZ6xhMKm7DM", image: "https://img.youtube.com/vi/EZ6xhMKm7DM/maxresdefault.jpg" },
+        { id: 17, name: "Client Success", quote: "Skilled support for property investment", youtubeId: "oT-lSZKupS4", image: "https://img.youtube.com/vi/oT-lSZKupS4/maxresdefault.jpg" },
+        { id: 18, name: "Client Success", quote: "Outstanding results for our family", youtubeId: "HzZnAw3whzQ", image: "https://img.youtube.com/vi/HzZnAw3whzQ/maxresdefault.jpg" },
+        { id: 19, name: "Client Success", quote: "Commitment to finding the best deals", youtubeId: "koBtDC4KNRo", image: "https://img.youtube.com/vi/koBtDC4KNRo/maxresdefault.jpg" },
+        { id: 20, name: "Client Success", quote: "Efficient and professional service", youtubeId: "WIMwRqTWJ-A", image: "https://img.youtube.com/vi/WIMwRqTWJ-A/maxresdefault.jpg" },
+        { id: 21, name: "Client Success", quote: "Detailed analysis and market insights", youtubeId: "JWC7rlDDgfc", image: "https://img.youtube.com/vi/JWC7rlDDgfc/maxresdefault.jpg" },
+        { id: 22, name: "Client Success", quote: "Negotiated the best terms for us", youtubeId: "6KtE9lNBprE", image: "https://img.youtube.com/vi/6KtE9lNBprE/maxresdefault.jpg" },
+        { id: 23, name: "Client Success", quote: "Exceptional local market knowledge", youtubeId: "vLiopriS5HA", image: "https://img.youtube.com/vi/vLiopriS5HA/maxresdefault.jpg" },
+        { id: 24, name: "Client Success", quote: "Great support for first-time buyers", youtubeId: "nW6iw5F4BWY", image: "https://img.youtube.com/vi/nW6iw5F4BWY/maxresdefault.jpg" },
+        { id: 25, name: "Client Success", quote: "Strategic advice for property portfolio", youtubeId: "GzPuAhsJ-7o", image: "https://img.youtube.com/vi/GzPuAhsJ-7o/maxresdefault.jpg" },
+        { id: 26, name: "Client Success", quote: "Found an off-market gem for us", youtubeId: "QhIK7kHBKfo", image: "https://img.youtube.com/vi/QhIK7kHBKfo/maxresdefault.jpg" },
+        { id: 27, name: "Client Success", quote: "Thorough due diligence and assessment", youtubeId: "XJSod7XHcQo", image: "https://img.youtube.com/vi/XJSod7XHcQo/maxresdefault.jpg" },
+        { id: 28, name: "Client Success", quote: "Simplifying the complex buying process", youtubeId: "ifqB5UC-S6Y", image: "https://img.youtube.com/vi/ifqB5UC-S6Y/maxresdefault.jpg" },
+        { id: 29, name: "Client Success", quote: "Dedicated to our property goals", youtubeId: "ar5xbcnV4Do", image: "https://img.youtube.com/vi/ar5xbcnV4Do/maxresdefault.jpg" },
+        { id: 30, name: "Client Success", quote: "Expertise that makes a difference", youtubeId: "ady1ChW69jc", image: "https://img.youtube.com/vi/ady1ChW69jc/maxresdefault.jpg" },
+        { id: 31, name: "Client Success", quote: "Highly recommended property advocate", youtubeId: "MZCqnadokR8", image: "https://img.youtube.com/vi/MZCqnadokR8/maxresdefault.jpg" },
+        { id: 32, name: "Client Success", quote: "Delivering real value to clients", youtubeId: "rJ9DhEke7P0", image: "https://img.youtube.com/vi/rJ9DhEke7P0/maxresdefault.jpg" },
     ],
     reviews: [
         { name: "John M.", rating: 5, date: "2 weeks ago", text: "Puja and Vishal are phenomenal! They found us an off-market property that perfectly matched our criteria. Their negotiation skills saved us thousands." },

@@ -107,11 +107,11 @@ const ReviewCard = ({ review, isDark = true }: { review: any, isDark?: boolean }
     );
 };
 
-const ScrollingColumn = ({ items, duration, reverse = false, count = 0, isDark = true }: { items: any[], duration: number, reverse?: boolean, count?: number, isDark?: boolean }) => {
+const ScrollingColumn = ({ items, duration, reverse = false, count = 0, isDark = true, className = "h-[800px]" }: { items: any[], duration: number, reverse?: boolean, count?: number, isDark?: boolean, className?: string }) => {
     const repeatedItems = [...items, ...items, ...items];
 
     return (
-        <div className="relative h-[800px] overflow-hidden">
+        <div className={`relative overflow-hidden ${className}`}>
             <motion.div
                 className="flex flex-col gap-8 py-4"
                 animate={{
@@ -250,18 +250,18 @@ const GoogleReviews: React.FC<GoogleReviewsProps> = ({
                         return (
                             <div className="relative group/scroller">
                                 <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                                    <ScrollingColumn items={col1} duration={col1.length * 15} isDark={true} />
-                                    <ScrollingColumn items={col2} duration={col2.length * 20} reverse={true} count={reviews.length} isDark={true} />
-                                    <ScrollingColumn items={col3} duration={col3.length * 18} isDark={true} />
+                                    <ScrollingColumn items={col1} duration={col1.length * 12} isDark={true} className="h-[800px]" />
+                                    <ScrollingColumn items={col2} duration={col2.length * 16} reverse={true} count={reviews.length} isDark={true} className="h-[800px]" />
+                                    <ScrollingColumn items={col3} duration={col3.length * 14} isDark={true} className="h-[800px]" />
                                 </div>
 
                                 <div className="md:hidden">
-                                    <ScrollingColumn items={reviews} duration={reviews.length * 25} isDark={true} />
+                                    <ScrollingColumn items={reviews} duration={reviews.length * 20} isDark={true} className="h-[1400px]" />
                                 </div>
 
                                 {/* Deep Overlays */}
-                                <div className="absolute inset-x-0 bottom-0 h-80 bg-gradient-to-t from-[#0a0f12] via-[#0a0f12]/90 to-transparent pointer-events-none z-20"></div>
-                                <div className="absolute inset-x-0 top-0 h-80 bg-gradient-to-b from-[#0a0f12] via-[#0a0f12]/90 to-transparent pointer-events-none z-20"></div>
+                                <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-[#0a0f12] via-[#0a0f12]/90 to-transparent pointer-events-none z-20"></div>
+                                <div className="absolute inset-x-0 top-0 h-96 bg-gradient-to-b from-[#0a0f12] via-[#0a0f12]/90 to-transparent pointer-events-none z-20"></div>
 
                                 <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-30">
                                     <MagneticButton>

@@ -9,7 +9,7 @@ interface GoogleReviewsProps {
     featurableId?: string;
 }
 
-const RatingSummaryCard = ({ count }: { count: number }) => {
+const RatingSummaryCard = () => {
     return (
         <div className="bg-gradient-to-br from-[#1a1a1a] to-[#000000] p-10 rounded-[3rem] text-white shadow-2xl flex flex-col items-center justify-center text-center border border-white/10 relative overflow-hidden group h-full min-h-[400px]">
             <div className="absolute top-0 right-0 w-48 h-48 bg-[#29b8bd] opacity-20 blur-[80px] group-hover:opacity-30 transition-opacity"></div>
@@ -107,7 +107,7 @@ const ReviewCard = ({ review, isDark = true }: { review: any, isDark?: boolean }
     );
 };
 
-const ScrollingColumn = ({ items, duration, reverse = false, count = 0, isDark = true, className = "h-[800px]" }: { items: any[], duration: number, reverse?: boolean, count?: number, isDark?: boolean, className?: string }) => {
+const ScrollingColumn = ({ items, duration, reverse = false, isDark = true, className = "h-[800px]" }: { items: any[], duration: number, reverse?: boolean, isDark?: boolean, className?: string }) => {
     const repeatedItems = [...items, ...items, ...items];
 
     return (
@@ -126,7 +126,7 @@ const ScrollingColumn = ({ items, duration, reverse = false, count = 0, isDark =
                 {repeatedItems.map((item, idx) => (
                     <div key={`${item.reviewId || 'summary'}-${idx}`} className="px-2">
                         {item.type === 'summary' ? (
-                            <RatingSummaryCard count={count} />
+                            <RatingSummaryCard />
                         ) : (
                             <ReviewCard review={item} isDark={isDark} />
                         )}
@@ -170,7 +170,7 @@ const FullReviewsModal = ({ isOpen, onClose, reviews }: { isOpen: boolean, onClo
                         <div className="p-10 border-b border-white/5 flex items-center justify-between bg-[#0a0f12]/80 backdrop-blur-md shrink-0">
                             <div>
                                 <h3 className="text-4xl font-black text-white leading-none tracking-tight">Full <span className="text-[#29b8bd]">Wall of Love</span></h3>
-                                <p className="text-gray-400 font-bold uppercase tracking-[0.2em] text-[10px] mt-4">Exploring {reviews.length} Experiences</p>
+                                <p className="text-gray-400 font-bold uppercase tracking-[0.2em] text-[10px] mt-4">Exploring 80+ Experiences</p>
                             </div>
                             <button
                                 onClick={onClose}
@@ -251,7 +251,7 @@ const GoogleReviews: React.FC<GoogleReviewsProps> = ({
                             <div className="relative group/scroller">
                                 <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                                     <ScrollingColumn items={col1} duration={col1.length * 12} isDark={true} className="h-[800px]" />
-                                    <ScrollingColumn items={col2} duration={col2.length * 16} reverse={true} count={reviews.length} isDark={true} className="h-[800px]" />
+                                    <ScrollingColumn items={col2} duration={col2.length * 16} reverse={true} isDark={true} className="h-[800px]" />
                                     <ScrollingColumn items={col3} duration={col3.length * 14} isDark={true} className="h-[800px]" />
                                 </div>
 

@@ -81,6 +81,21 @@ const VideoTestimonials: React.FC = () => {
                 onClose={() => setSelectedVideoId(null)}
                 videoId={selectedVideoId || ""}
             />
+
+            {/* View All Button */}
+            <div className="container mx-auto px-4 mt-20 text-center">
+                <button
+                    onClick={() => window.open('https://www.youtube.com/@BuyersMatch/shorts', '_blank')}
+                    className="inline-flex items-center px-10 py-5 bg-[#29b8bd] text-white font-black rounded-3xl shadow-xl shadow-[#29b8bd]/20 hover:bg-[#23a1a5] hover:shadow-2xl hover:shadow-[#29b8bd]/30 transition-all duration-300 group"
+                >
+                    View All Testimonials
+                    <div className="ml-4 w-10 h-10 bg-white/20 text-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                        </svg>
+                    </div>
+                </button>
+            </div>
         </section>
     );
 };

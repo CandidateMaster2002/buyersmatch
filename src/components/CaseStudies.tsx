@@ -1,14 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { siteConfig } from '../config/site';
 import AnimatedText from './AnimatedText';
-import houseSa from '../assets/house_sa.jpg';
-import houseWa from '../assets/house_wa.jpg';
-import houseQld from '../assets/house_qld.jpg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBed, faBath, faCar } from '@fortawesome/free-solid-svg-icons';
 
 const CaseStudies: React.FC = () => {
-    const storyImages = [houseSa, houseWa, houseQld];
-
+    const navigate = useNavigate();
     // Duplicate the stories to ensure a smooth infinite loop
     const loopedStories = [...siteConfig.successStories, ...siteConfig.successStories, ...siteConfig.successStories];
 
@@ -44,41 +43,55 @@ const CaseStudies: React.FC = () => {
                     whileDrag={{ transition: { duration: 0 } }}
                 >
                     {loopedStories.map((story: any, index: number) => {
-                        const imageIndex = index % storyImages.length;
                         return (
-                            <div key={index} className="flex-shrink-0 w-[400px] bg-white rounded-[2.5rem] overflow-hidden shadow-xl border border-gray-100 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl pointer-events-none group-active:pointer-events-none">
-                                <div className="h-64 bg-gray-200 relative overflow-hidden pointer-events-none">
+                            <div key={index} className="flex-shrink-0 w-[500px] bg-white rounded-[2.5rem] overflow-hidden shadow-xl border border-gray-100 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl pointer-events-none group-active:pointer-events-none">
+                                <div className="h-72 bg-gray-200 relative overflow-hidden pointer-events-none">
                                     <img
-                                        src={storyImages[imageIndex]}
+                                        src={story.image}
                                         alt={`${story.state} Property`}
                                         className="w-full h-full object-cover transition-transform duration-700 pointer-events-none select-none"
                                         onDragStart={(e) => e.preventDefault()}
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                    <div className="absolute bottom-4 left-6">
-                                        <p className="font-black text-2xl uppercase tracking-widest text-white drop-shadow-md">{story.state} Property</p>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                                    <div className="absolute bottom-6 left-8">
+                                        <p className="font-black text-2xl uppercase tracking-widest text-white drop-shadow-md">{story.state}</p>
                                     </div>
-                                    <div className="absolute top-6 right-6 bg-white/95 backdrop-blur-sm px-4 py-1.5 rounded-full font-bold text-sm shadow-sm text-[#29b8bd]">
-                                        {story.status}
-                                    </div>
+
                                 </div>
                                 <div className="p-10 pointer-events-auto">
-                                    <div className="grid grid-cols-2 gap-8">
-                                        <div>
-                                            <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Purchase Price</div>
-                                            <div className="font-black text-2xl text-gray-900">{story.price}</div>
+                                    <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-8 pb-6 border-b border-gray-100">
+                                        <div className="flex items-center gap-2">
+                                            <FontAwesomeIcon icon={faBed} className="text-[#29b8bd] w-4 h-4" />
+                                            <span className="text-gray-900 font-bold text-sm tracking-tight">{story.beds} Bedrooms</span>
                                         </div>
-                                        <div>
-                                            <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Weekly Rent</div>
-                                            <div className="font-black text-2xl text-gray-900">{story.rent}</div>
+                                        <div className="flex items-center gap-2">
+                                            <FontAwesomeIcon icon={faBath} className="text-[#29b8bd] w-4 h-4" />
+                                            <span className="text-gray-900 font-bold text-sm tracking-tight">{story.baths} Bathrooms</span>
                                         </div>
-                                        <div>
-                                            <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Rental Yield</div>
-                                            <div className="font-black text-2xl text-[#29b8bd]">{story.yield}</div>
+                                        {story.cars > 0 && (
+                                            <div className="flex items-center gap-2">
+                                                <FontAwesomeIcon icon={faCar} className="text-[#29b8bd] w-4 h-4" />
+                                                <span className="text-gray-900 font-bold text-sm tracking-tight">{story.cars} Parking</span>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <div className="grid grid-cols-2 gap-y-8 gap-x-4 text-left">
+                                        <div className="flex flex-col">
+                                            <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">Purchase Price</span>
+                                            <span className="text-2xl font-black text-gray-900 leading-none">{story.price}</span>
                                         </div>
-                                        <div>
-                                            <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Opportunity</div>
-                                            <div className="font-black text-2xl text-gray-900">Off Market</div>
+                                        <div className="flex flex-col">
+                                            <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">Weekly Rent</span>
+                                            <span className="text-2xl font-black text-gray-900 leading-none">{story.rent}</span>
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">Rental Yield</span>
+                                            <span className="text-2xl font-black text-[#29b8bd] leading-none">{story.yield}</span>
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">Purchase</span>
+                                            <span className="text-xl font-black text-gray-900 leading-none">{story.status}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -90,6 +103,21 @@ const CaseStudies: React.FC = () => {
                 {/* Gradient Fades */}
                 <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#e8f7f7] to-transparent z-10 pointer-events-none"></div>
                 <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#e8f7f7] to-transparent z-10 pointer-events-none"></div>
+            </div>
+
+            {/* View All Button */}
+            <div className="container mx-auto px-4 mt-20 text-center">
+                <button
+                    onClick={() => navigate('/case-studies')}
+                    className="inline-flex items-center px-10 py-5 bg-white text-[#29b8bd] font-black rounded-3xl border-2 border-[#29b8bd]/10 hover:border-[#29b8bd] hover:shadow-2xl hover:shadow-[#29b8bd]/20 transition-all duration-300 group"
+                >
+                    View All Case Studies
+                    <div className="ml-4 w-10 h-10 bg-[#29b8bd] text-white rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </div>
+                </button>
             </div>
         </section>
     );

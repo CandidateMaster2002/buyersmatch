@@ -24,7 +24,7 @@ const RatingSummaryCard = ({ count }: { count: number }) => {
                         </svg>
                     </div>
                 </div>
-                <h2 className="text-8xl font-black mb-2 tracking-tighter text-white">4.9</h2>
+                <h2 className="text-8xl font-black mb-2 tracking-tighter text-white">5.0</h2>
                 <div className="flex justify-center text-[#29b8bd] gap-1 mb-8">
                     {[...Array(5)].map((_, i) => (
                         <svg key={i} className="w-8 h-8 fill-current" viewBox="0 0 20 20">
@@ -33,7 +33,7 @@ const RatingSummaryCard = ({ count }: { count: number }) => {
                     ))}
                 </div>
                 <p className="text-gray-400 font-bold uppercase tracking-[0.2em] text-[10px] mb-8 leading-relaxed">
-                    Excellence Shared By<br />Over {count}+ Valued Clients
+                    Excellence Shared By<br />Over 80+ Valued Clients
                 </p>
                 <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-white/5 rounded-full border border-white/10 ring-1 ring-white/5">
                     <div className="w-2 hs-2 bg-[#29b8bd] rounded-full animate-pulse shadow-[0_0_10px_#29b8bd]"></div>
@@ -94,7 +94,7 @@ const ReviewCard = ({ review, isDark = true }: { review: any, isDark?: boolean }
                     }}
                     className="mt-4 text-[#29b8bd] font-black text-[10px] uppercase tracking-[0.2em] hover:opacity-70 transition-opacity"
                 >
-                    {isExpanded ? 'Collapse' : 'Expand Story'}
+                    {isExpanded ? 'Collapse' : 'Read More'}
                 </button>
             )}
             <div className={`absolute top-6 right-8 transition-colors ${isDark ? 'text-white/5 group-hover:text-[#29b8bd]/10' : 'text-gray-50'

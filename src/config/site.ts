@@ -45,12 +45,12 @@ export const siteConfig = {
         { name: "maps", icon: "Maps", url: "https://www.google.com/maps/place/BuyersMatch/@-36.5712557,99.6994519,3z/data=!4m6!3m5!1s0x9a64e54f2968b55:0x765d586cc54a73c!8m2!3d-24.1501978!4d136.0132792!16s%2Fg%2F11v6z05n76?entry=ttu&g_ep=EgoyMDI2MDIwOC4wIKXMDSoASAFQAw%3D%3D" },
     ],
     navigation: [
-        { id: "help", label: "Who We Help" },
-        { id: "approach", label: "How We Help" },
-        { id: "process", label: "Our Process" },
-        { id: "why-choose", label: "Why Us" },
+        { id: "help", label: "Services" },
+        { id: "process", label: "Process" },
         { id: "case-studies", label: "Results" },
-        { id: "testimonials", label: "Reviews" },
+        { id: "testimonials", label: "Testimonials" },
+        { id: "google-reviews", label: "Google Reviews" },
+        { id: "about", label: "About" },
         { id: "faq", label: "FAQ" },
     ],
     videoTestimonials: [

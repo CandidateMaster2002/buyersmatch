@@ -10,7 +10,6 @@ import WhyChoose from './WhyChoose';
 import CaseStudies from './CaseStudies';
 import GoogleReviews from './GoogleReviews';
 import Awards from './Awards';
-import Blog from './Blog';
 import FinalCTA from './FinalCTA';
 import StickyCTA from './StickyCTA';
 import TopBar from './TopBar';
@@ -173,7 +172,6 @@ const BuyersMatchLandingPage = () => {
                 <SectionWrapper><VideoTestimonials /></SectionWrapper>
                 <SectionWrapper><Awards /></SectionWrapper>
                 <SectionWrapper><FAQ /></SectionWrapper>
-                <SectionWrapper><Blog /></SectionWrapper>
                 <SectionWrapper><FinalCTA /></SectionWrapper>
                 <TopBar />
                 <Footer scrollToSection={scrollToSection} />

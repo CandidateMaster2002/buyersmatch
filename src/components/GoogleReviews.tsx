@@ -221,7 +221,7 @@ const GoogleReviews: React.FC<GoogleReviewsProps> = ({
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
-        <section id="testimonials" className="relative py-32 px-4 bg-[#0a0f12] overflow-hidden scroll-mt-24">
+        <section id="google-reviews" className="relative py-32 px-4 bg-[#0a0f12] overflow-hidden scroll-mt-24">
             {/* Dark Aesthetic Decorations */}
             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#29b8bd]/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
             <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-[#29b8bd]/5 rounded-full blur-[150px] translate-y-1/2 -translate-x-1/2"></div>

@@ -11,7 +11,7 @@ const VideoTestimonials: React.FC = () => {
     const doubledTestimonials = [...siteConfig.videoTestimonials, ...siteConfig.videoTestimonials];
 
     return (
-        <section id="video-testimonials" className="py-24 px-4 bg-[#e8f7f7] scroll-mt-24 overflow-hidden">
+        <section id="testimonials" className="py-24 px-4 bg-[#e8f7f7] scroll-mt-24 overflow-hidden">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
                     <AnimatedText

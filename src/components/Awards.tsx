@@ -1,140 +1,80 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { siteConfig } from '../config/site';
+import React from 'react';
+import { motion } from 'framer-motion';
 import AnimatedText from './AnimatedText';
+import awardImg from '../assets/award_jpg.jpg';
 
 const Awards: React.FC = () => {
-    const [currentAwardIndex, setCurrentAwardIndex] = useState(0);
-
-    const awards = [
-        {
-            icon: "🏆",
-            title: "Rising Star 2024",
-            organization: "Buyer's Agent Institute",
-            badge: "#1",
-            color: "from-[#29b8bd] to-[#1a8a8e]"
-        },
-        {
-            icon: "⭐",
-            title: "Top Performer",
-            organization: "Property Excellence Awards",
-            badge: "5★",
-            color: "from-amber-500 to-orange-600"
-        },
-        {
-            icon: "🎖️",
-            title: "Client Choice Award",
-            organization: "Australian Property Network",
-            badge: "2024",
-            color: "from-purple-500 to-indigo-600"
-        },
-        {
-            icon: "🥇",
-            title: "Best Service",
-            organization: "Real Estate Excellence",
-            badge: "Gold",
-            color: "from-yellow-500 to-amber-600"
-        }
-    ];
-
-    // Auto-rotate every 2 seconds
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentAwardIndex((prev) => (prev + 1) % awards.length);
-        }, 2000);
-
-        return () => clearInterval(interval);
-    }, [awards.length]);
-
-    const awardVariants = {
-        enter: {
-            opacity: 0,
-            scale: 0.9,
-            rotateY: 90,
-            transition: { duration: 0.3 }
-        },
-        center: {
-            opacity: 1,
-            scale: 1,
-            rotateY: 0,
-            transition: { duration: 0.4 }
-        },
-        exit: {
-            opacity: 0,
-            scale: 0.9,
-            rotateY: -90,
-            transition: { duration: 0.3 }
-        }
-    };
-
     return (
-        <section id="awards" className="py-32 px-4 bg-white relative overflow-hidden scroll-mt-24">
+        <section id="awards" className="py-24 md:py-32 px-4 bg-white relative overflow-hidden scroll-mt-24">
+            {/* Elegant Background Element */}
             <div className="absolute top-0 right-0 w-1/3 h-full bg-[#e8f7f7]/30 -z-10 skew-x-12 transform origin-top"></div>
+
             <div className="container mx-auto">
-                <div className="max-w-5xl mx-auto flex flex-col lg:flex-row items-center gap-16">
-                    {/* Left: Rotating Award Cards */}
-                    <div className="w-full lg:w-2/5">
-                        <div className="relative h-80">
-                            <AnimatePresence mode="wait">
-                                <motion.div
-                                    key={currentAwardIndex}
-                                    variants={awardVariants}
-                                    initial="enter"
-                                    animate="center"
-                                    exit="exit"
-                                    className="absolute inset-0"
-                                >
-                                    <div className={`bg-gradient-to-br ${awards[currentAwardIndex].color} rounded-[3rem] p-12 text-center text-white shadow-2xl h-full flex flex-col justify-center`}>
-                                        <div className="text-8xl mb-8 transform -rotate-12">{awards[currentAwardIndex].icon}</div>
-                                        <h3 className="text-3xl font-black mb-2 leading-tight">{awards[currentAwardIndex].title}</h3>
-                                        <p className="text-white/90 font-bold uppercase tracking-widest text-sm">{awards[currentAwardIndex].organization}</p>
-                                    </div>
-                                    <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-yellow-400 rounded-full flex items-center justify-center font-black text-gray-900 text-2xl shadow-xl border-4 border-white">
-                                        {awards[currentAwardIndex].badge}
-                                    </div>
-                                </motion.div>
-                            </AnimatePresence>
-                        </div>
-
-                        {/* Indicator Dots */}
-                        <div className="flex justify-center gap-2 mt-12">
-                            {awards.map((_, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => setCurrentAwardIndex(index)}
-                                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentAwardIndex
-                                        ? 'bg-[#29b8bd] w-8'
-                                        : 'bg-gray-300 hover:bg-gray-400'
-                                        }`}
-                                    aria-label={`View award ${index + 1}`}
-                                />
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Right: Story Content */}
-                    <div className="w-full lg:w-3/5">
+                <div className="max-w-5xl mx-auto">
+                    <div className="text-center mb-16 md:mb-20">
                         <AnimatedText
                             text="Excellence Recognized"
-                            className="text-4xl md:text-6xl font-black text-gray-900 leading-tight mb-12"
+                            className="text-4xl md:text-6xl font-black text-gray-900 leading-tight"
                         />
-                        <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
-                            <p className="font-bold text-2xl text-[#29b8bd]">Puja's Journey to Success</p>
-                            <p>
-                                After a successful career change, Puja entered the property industry with passion
-                                and determination. Starting with just 5 clients, she quickly established herself
-                                as a trusted buyer's agent.
+                        <motion.div
+                            initial={{ opacity: 0, scaleX: 0 }}
+                            whileInView={{ opacity: 1, scaleX: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.5 }}
+                            className="h-1.5 w-24 bg-gradient-to-r from-[#29b8bd] to-[#1a8a8e] mx-auto mt-6 rounded-full"
+                        ></motion.div>
+                    </div>
+
+                    <div className="flex flex-col items-center gap-12">
+                        {/* Award Image with Premium Styling */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="w-full max-w-2xl"
+                        >
+                            <div className="relative group">
+                                {/* Soft glow effect behind the image */}
+                                <div className="absolute -inset-4 bg-gradient-to-r from-[#29b8bd] to-[#1a8a8e] rounded-[2.5rem] blur-2xl opacity-10 group-hover:opacity-20 transition duration-1000"></div>
+
+                                <div className="relative bg-white p-3 md:p-6 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100 overflow-hidden">
+                                    <img
+                                        src={awardImg}
+                                        alt="Rising Star 2024 Award"
+                                        className="w-full h-auto rounded-3xl transform transition duration-700 group-hover:scale-[1.02]"
+                                    />
+                                </div>
+
+                                {/* Floating Badge Ornament */}
+                                <motion.div
+                                    initial={{ scale: 0, rotate: -20 }}
+                                    whileInView={{ scale: 1, rotate: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.8 }}
+                                    className="absolute -top-6 -right-6 md:-top-10 md:-right-10 w-24 h-24 md:w-32 md:h-32 bg-yellow-400 rounded-full flex flex-col items-center justify-center font-black text-gray-900 shadow-2xl border-4 border-white z-10"
+                                >
+                                    <span className="text-xs md:text-sm uppercase tracking-tighter">Winner</span>
+                                    <span className="text-2xl md:text-4xl">#1</span>
+                                </motion.div>
+                            </div>
+                        </motion.div>
+
+                        {/* Award Details */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, delay: 0.6 }}
+                            className="text-center"
+                        >
+                            <h3 className="text-3xl md:text-4xl font-black text-gray-900 mb-2">
+                                Rising Star 2024
+                            </h3>
+                            <p className="text-xl md:text-2xl text-[#29b8bd] font-bold uppercase tracking-widest">
+                                Buyer's Agent Institute
                             </p>
-                            <p>
-                                Her commitment to client success and innovative approach to property matching
-                                led to rapid growth and recognition. Today, {siteConfig.name} is thriving, helping
-                                clients across Australia find their perfect property matches.
-                            </p>
-                            <p className="text-gray-500 italic">
-                                These awards celebrate our journey and ongoing commitment
-                                to excellence in property buying services.
-                            </p>
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
             </div>

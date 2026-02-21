@@ -39,7 +39,7 @@ const AboutUsSection: React.FC = () => {
                                     </div>
                                     <div>
                                         <div className="font-black text-gray-900 text-lg">
-                                            <AnimatedCounter value={500} suffix="+" />
+                                            <AnimatedCounter value={150} suffix="+" />
                                         </div>
                                         <div className="text-gray-600 text-sm font-semibold">Happy Clients</div>
                                     </div>

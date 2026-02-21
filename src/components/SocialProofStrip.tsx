@@ -45,7 +45,7 @@ const SocialProofStrip: React.FC = () => {
                         </div>
                         <div className="text-left">
                             <div className="font-black text-gray-900 text-lg">
-                                <AnimatedCounter value={500} suffix="+ Happy Clients" />
+                                <AnimatedCounter value={150} suffix="+" />
                             </div>
                             <div className="text-gray-500 text-sm font-medium">Properties Secured</div>
                         </div>

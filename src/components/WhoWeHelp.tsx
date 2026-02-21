@@ -48,7 +48,7 @@ const WhoWeHelp: React.FC = () => {
                         <motion.div
                             key={index}
                             variants={itemVariants}
-                            className="group relative overflow-hidden rounded-[2.5rem] bg-gray-50 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-700"
+                            className="group relative overflow-hidden rounded-[2.5rem] bg-gray-50 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-700 h-full"
                         >
                             <div className="flex flex-col lg:flex-row h-full">
                                 {/* Image Half */}

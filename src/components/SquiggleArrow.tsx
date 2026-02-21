@@ -28,7 +28,7 @@ export const SquiggleArrow: React.FC<SquiggleArrowProps> = ({ className, delay =
             />
             {/* Arrow head */}
             <motion.path
-                d="M50 75 L 60 80 L 65 70"
+                d="M68 72 L 60 80 L 72 82"
                 stroke="#29b8bd"
                 strokeWidth="3"
                 strokeLinecap="round"

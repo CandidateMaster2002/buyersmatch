@@ -40,7 +40,7 @@ const FAQ: React.FC = () => {
     };
 
     return (
-        <section id="faq" className="py-24 px-4 bg-white scroll-mt-24">
+        <section id="faq" className="py-24 px-4 bg-[#e8f7f7] scroll-mt-24">
             <div className="container mx-auto max-w-4xl">
                 {/* Header */}
                 <div className="text-center mb-16">

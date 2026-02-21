@@ -68,7 +68,7 @@ const WhyChoose: React.FC = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-500 group border border-gray-100"
+                            className="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-500 group border border-gray-100 flex flex-col h-full"
                         >
                             <div className={`w-16 h-16 ${item.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500`}>
                                 <div className={item.iconColor}>

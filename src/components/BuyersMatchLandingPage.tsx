@@ -12,6 +12,7 @@ import GoogleReviews from './GoogleReviews';
 import Awards from './Awards';
 import FinalCTA from './FinalCTA';
 import StickyCTA from './StickyCTA';
+import Blog from './Blog';
 import TopBar from './TopBar';
 import Footer from './Footer';
 import AboutUsSection from './AboutUs';
@@ -170,6 +171,7 @@ const BuyersMatchLandingPage = () => {
                 <SectionWrapper><CaseStudies /></SectionWrapper>
                 <SectionWrapper><GoogleReviews /></SectionWrapper>
                 <SectionWrapper><VideoTestimonials /></SectionWrapper>
+                <SectionWrapper><Blog /></SectionWrapper>
                 <SectionWrapper><Awards /></SectionWrapper>
                 <SectionWrapper><FAQ /></SectionWrapper>
                 <SectionWrapper><FinalCTA /></SectionWrapper>

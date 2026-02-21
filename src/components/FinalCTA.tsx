@@ -52,7 +52,7 @@ const FinalCTA: React.FC = () => {
                                         <span className="relative z-10 flex items-center">
                                             Book Free Strategy Session
                                             <svg className="w-5 h-5 ml-3 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                                             </svg>
                                         </span>
                                     </button>

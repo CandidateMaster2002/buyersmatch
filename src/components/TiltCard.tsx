@@ -64,6 +64,7 @@ export const TiltCard: React.FC<TiltCardProps> = ({ children, className = "" }) 
             className={`relative ${className}`}
         >
             <div
+                className="h-full"
                 style={{
                     transform: isHovered ? "translateZ(50px)" : "translateZ(0px)",
                     transformStyle: "preserve-3d",

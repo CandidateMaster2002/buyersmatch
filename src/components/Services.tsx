@@ -90,8 +90,9 @@ const Services: React.FC = () => {
                         <motion.div
                             key={index}
                             variants={itemVariants}
+                            className="h-full"
                         >
-                            <TiltCard>
+                            <TiltCard className="h-full">
                                 <div className="group bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:border-[#29b8bd]/30 transition-all duration-300 flex flex-col h-full hover:shadow-xl">
                                     {/* Icon with gradient background - subtle hover lift */}
                                     <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center text-white mb-6 transition-all duration-300 group-hover:shadow-md`}>

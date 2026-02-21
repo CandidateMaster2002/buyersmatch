@@ -1,9 +1,36 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedText from './AnimatedText';
 import awardImg from '../assets/award_jpg.jpg';
+import award2Img from '../assets/award2.jpeg';
 
 const Awards: React.FC = () => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const awards = [
+        {
+            image: awardImg,
+            title: "Rising Star 2024",
+            subtitle: "Buyer's Agent Institute",
+            badgeLabel: "Winner",
+            badgeValue: "#1"
+        },
+        {
+            image: award2Img,
+            title: "Nominee (Professional Services)",
+            subtitle: "Monash Business Awards",
+            badgeLabel: "Featured",
+            badgeValue: "🏆"
+        }
+    ];
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % awards.length);
+        }, 5000);
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <section id="awards" className="py-24 md:py-32 px-4 bg-white relative overflow-hidden scroll-mt-24">
             {/* Elegant Background Element */}
@@ -25,56 +52,65 @@ const Awards: React.FC = () => {
                         ></motion.div>
                     </div>
 
-                    <div className="flex flex-col items-center gap-12">
-                        {/* Award Image with Premium Styling */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
-                            className="w-full max-w-2xl"
-                        >
-                            <div className="relative group">
-                                {/* Soft glow effect behind the image */}
-                                <div className="absolute -inset-4 bg-gradient-to-r from-[#29b8bd] to-[#1a8a8e] rounded-[2.5rem] blur-2xl opacity-10 group-hover:opacity-20 transition duration-1000"></div>
+                    <div className="relative">
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={currentIndex}
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -20 }}
+                                transition={{ duration: 0.5, ease: "easeInOut" }}
+                                className="flex flex-col items-center gap-12"
+                            >
+                                {/* Award Image with Premium Styling */}
+                                <div className="w-full max-w-2xl">
+                                    <div className="relative group overflow-visible">
+                                        {/* Soft glow effect behind the image */}
+                                        <div className="absolute -inset-6 bg-gradient-to-r from-[#29b8bd] to-[#1a8a8e] rounded-[2.5rem] blur-3xl opacity-10 group-hover:opacity-20 transition duration-1000"></div>
 
-                                <div className="relative bg-white p-3 md:p-6 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100 overflow-hidden">
-                                    <img
-                                        src={awardImg}
-                                        alt="Rising Star 2024 Award"
-                                        className="w-full h-auto rounded-3xl transform transition duration-700 group-hover:scale-[1.02]"
-                                    />
+                                        <img
+                                            src={awards[currentIndex].image}
+                                            alt={awards[currentIndex].title}
+                                            className="relative z-10 w-full h-auto max-h-[600px] object-contain rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.15)] transform transition duration-700 group-hover:scale-[1.02]"
+                                        />
+
+                                        {/* Floating Badge Ornament */}
+                                        <motion.div
+                                            initial={{ scale: 0, rotate: -20 }}
+                                            animate={{ scale: 1, rotate: 0 }}
+                                            transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.3 }}
+                                            className="absolute -top-6 -right-6 md:-top-10 md:-right-10 w-24 h-24 md:w-32 md:h-32 bg-yellow-400 rounded-full flex flex-col items-center justify-center font-black text-gray-900 shadow-2xl border-4 border-white z-20"
+                                        >
+                                            <span className="text-xs md:text-sm uppercase tracking-tighter">{awards[currentIndex].badgeLabel}</span>
+                                            <span className="text-2xl md:text-4xl">{awards[currentIndex].badgeValue}</span>
+                                        </motion.div>
+                                    </div>
                                 </div>
 
-                                {/* Floating Badge Ornament */}
-                                <motion.div
-                                    initial={{ scale: 0, rotate: -20 }}
-                                    whileInView={{ scale: 1, rotate: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.8 }}
-                                    className="absolute -top-6 -right-6 md:-top-10 md:-right-10 w-24 h-24 md:w-32 md:h-32 bg-yellow-400 rounded-full flex flex-col items-center justify-center font-black text-gray-900 shadow-2xl border-4 border-white z-10"
-                                >
-                                    <span className="text-xs md:text-sm uppercase tracking-tighter">Winner</span>
-                                    <span className="text-2xl md:text-4xl">#1</span>
-                                </motion.div>
-                            </div>
-                        </motion.div>
+                                {/* Award Details */}
+                                <div className="text-center">
+                                    <h3 className="text-3xl md:text-4xl font-black text-gray-900 mb-2">
+                                        {awards[currentIndex].title}
+                                    </h3>
+                                    <p className="text-xl md:text-2xl text-[#29b8bd] font-bold uppercase tracking-widest">
+                                        {awards[currentIndex].subtitle}
+                                    </p>
+                                </div>
+                            </motion.div>
+                        </AnimatePresence>
 
-                        {/* Award Details */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1, delay: 0.6 }}
-                            className="text-center"
-                        >
-                            <h3 className="text-3xl md:text-4xl font-black text-gray-900 mb-2">
-                                Rising Star 2024
-                            </h3>
-                            <p className="text-xl md:text-2xl text-[#29b8bd] font-bold uppercase tracking-widest">
-                                Buyer's Agent Institute
-                            </p>
-                        </motion.div>
+                        {/* Pagination Dots */}
+                        <div className="flex justify-center gap-3 mt-12">
+                            {awards.map((_, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => setCurrentIndex(index)}
+                                    className={`h-3 rounded-full transition-all duration-300 ${currentIndex === index ? 'w-10 bg-[#29b8bd]' : 'w-3 bg-gray-200'
+                                        }`}
+                                    aria-label={`Go to slide ${index + 1}`}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>

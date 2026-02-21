@@ -17,12 +17,6 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, scrollTargetRef }) => 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     useEffect(() => {
-        const handleScroll = (e: Event) => {
-            const target = e.target as HTMLDivElement;
-            const scrollY = scrollTargetRef ? target.scrollTop : window.scrollY;
-            setIsScrolled(scrollY > 20);
-        };
-
         const observerOptions = {
             root: scrollTargetRef?.current || null,
             rootMargin: '-20% 0px -70% 0px',
@@ -39,17 +33,30 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, scrollTargetRef }) => 
 
         const observer = new IntersectionObserver(observerCallback, observerOptions);
 
+        // Observer for navbar shrinking - specifically watching hero
+        const heroObserver = new IntersectionObserver(
+            ([entry]) => {
+                // Shrink navbar only when hero is NOT intersecting (covered)
+                setIsScrolled(!entry.isIntersecting);
+            },
+            {
+                root: scrollTargetRef?.current || null,
+                threshold: 0,
+                rootMargin: "0px 0px -100% 0px" // Triggers when hero bottom leaves viewport top
+            }
+        );
+
         siteConfig.navigation.forEach((item) => {
             const element = document.getElementById(item.id);
             if (element) observer.observe(element);
         });
 
-        const target = scrollTargetRef?.current || window;
-        target.addEventListener('scroll', handleScroll);
+        const heroElement = document.getElementById('hero');
+        if (heroElement) heroObserver.observe(heroElement);
 
         return () => {
             observer.disconnect();
-            target.removeEventListener('scroll', handleScroll);
+            heroObserver.disconnect();
         };
     }, [scrollTargetRef]);
 
@@ -82,7 +89,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, scrollTargetRef }) => 
                             <img
                                 src={logo}
                                 alt={siteConfig.name}
-                                className={`w-auto object-contain transition-all duration-300 group-hover:scale-105 ${isScrolled ? 'h-12 md:h-16' : 'h-24 md:h-28'
+                                className={`w-auto object-contain transition-all duration-300 group-hover:scale-105 ${isScrolled ? 'h-16 md:h-20' : 'h-32 md:h-36'
                                     }`}
                             />
                         </div>

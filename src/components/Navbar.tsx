@@ -37,12 +37,23 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, scrollTargetRef }) => 
         const heroObserver = new IntersectionObserver(
             ([entry]) => {
                 // Shrink navbar only when hero is NOT intersecting (covered)
-                setIsScrolled(!entry.isIntersecting);
+                const isAtTop = scrollTargetRef?.current ? scrollTargetRef.current.scrollTop < 50 : true;
+
+                if (isAtTop) {
+                    setIsScrolled(false);
+                } else if (!entry.isIntersecting) {
+                    // Only shrink when hero is definitely gone
+                    setIsScrolled(true);
+                } else if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+                    // Only grow when hero is significantly back in view
+                    // This ratio check prevents the rapid toggle at the very edge
+                    setIsScrolled(false);
+                }
             },
             {
                 root: scrollTargetRef?.current || null,
-                threshold: 0,
-                rootMargin: "0px 0px -100% 0px" // Triggers when hero bottom leaves viewport top
+                threshold: [0, 0.1, 0.2], // Multiple thresholds for smoother detection
+                rootMargin: "0px 0px -50px 0px" // Add buffer to prevent growing pushing hero out of view
             }
         );
 
@@ -68,10 +79,12 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, scrollTargetRef }) => 
     return (
         <header className="relative z-[100] w-full bg-white">
             {/* Top Bar Header */}
-            <TopBar className={`transition-all duration-300 ${isScrolled ? 'h-0 opacity-0 overflow-hidden' : 'h-auto opacity-100'}`} />
+            <div className={`transition-all duration-500 ease-in-out ${isScrolled ? 'max-h-0 opacity-0 overflow-hidden' : 'max-h-20 opacity-100'}`}>
+                <TopBar />
+            </div>
 
             {/* Main Navbar */}
-            <nav className={`transition-all duration-300 ${isScrolled ? 'bg-white/90 shadow-lg py-0' : 'bg-white py-0'
+            <nav className={`transition-all duration-500 ease-in-out ${isScrolled ? 'bg-white/95 shadow-md py-1' : 'bg-white py-2'
                 }`}>
                 <div className="container mx-auto px-4 relative">
                     <div className="flex items-center justify-between">
@@ -89,7 +102,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, scrollTargetRef }) => 
                             <img
                                 src={logo}
                                 alt={siteConfig.name}
-                                className={`w-auto object-contain transition-all duration-300 group-hover:scale-105 ${isScrolled ? 'h-16 md:h-20' : 'h-32 md:h-36'
+                                className={`w-auto object-contain transition-all duration-500 group-hover:scale-105 ${isScrolled ? 'h-16 md:h-20' : 'h-32 md:h-36'
                                     }`}
                             />
                         </div>

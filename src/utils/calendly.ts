@@ -1,8 +1,10 @@
+import { siteConfig } from '../config/site';
+
 // Calendly popup utility
 export const openCalendlyPopup = () => {
     if (typeof window !== 'undefined' && (window as any).Calendly) {
         (window as any).Calendly.initPopupWidget({
-            url: 'https://calendly.com/puja-2fa'
+            url: siteConfig.contact.calendly
         });
     }
 };

@@ -34,7 +34,7 @@ export const siteConfig = {
         address: "Glen Waverley, VIC 3150",
         phones: ["+61 466 914 929"],
         email: "info@buyersmatch.com.au",
-        calendly: "https://calendly.com/buyersmatch",
+        calendly: "https://calendly.com/puja-2fa/initialmeeting",
     },
     socials: [
         { name: "facebook", icon: "Facebook", url: "https://www.facebook.com/buyersmatchaustralia" },

@@ -28,9 +28,9 @@ const itemVariants = {
 
 const WhoWeHelp: React.FC = () => {
     return (
-        <section id="help" className="py-24 px-4 bg-white scroll-mt-24">
+        <section id="help" className="py-12 px-4 bg-white scroll-mt-24">
             <div className="container mx-auto max-w-7xl">
-                <div className="text-center mb-16">
+                <div className="text-center mb-8">
                     <AnimatedText
                         text="Who We Help"
                         className="text-4xl md:text-6xl font-black text-gray-900"
@@ -42,17 +42,17 @@ const WhoWeHelp: React.FC = () => {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-100px" }}
-                    className="grid md:grid-cols-2 gap-12"
+                    className="grid md:grid-cols-2 gap-6"
                 >
                     {siteConfig.whoWeHelp.map((item, index) => (
                         <motion.div
                             key={index}
                             variants={itemVariants}
-                            className="group relative overflow-hidden rounded-[2.5rem] bg-gray-50 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-700 h-full"
+                            className="group relative overflow-hidden rounded-[1.5rem] bg-gray-50 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-700 h-full"
                         >
                             <div className="flex flex-col lg:flex-row h-full">
                                 {/* Image Half */}
-                                <div className="lg:w-1/2 relative h-64 lg:h-auto overflow-hidden">
+                                <div className="lg:w-1/2 relative h-40 lg:h-auto overflow-hidden">
                                     <img
                                         src={item.image}
                                         alt={item.title}
@@ -62,16 +62,16 @@ const WhoWeHelp: React.FC = () => {
                                 </div>
 
                                 {/* Content Half */}
-                                <div className="lg:w-1/2 p-8 lg:p-10 flex flex-col justify-center">
-                                    <div className="w-12 h-12 bg-[#29b8bd]/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#29b8bd] transition-colors duration-500">
+                                <div className="lg:w-1/2 p-6 lg:p-8 flex flex-col justify-center">
+                                    <div className="w-10 h-10 bg-[#29b8bd]/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-[#29b8bd] transition-colors duration-500">
                                         <svg className="w-6 h-6 text-[#29b8bd] group-hover:text-white transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
                                     </div>
-                                    <h3 className="text-2xl font-black text-gray-900 mb-4 group-hover:text-[#29b8bd] transition-colors duration-500">
+                                    <h3 className="text-2xl font-black text-gray-900 mb-3 group-hover:text-[#29b8bd] transition-colors duration-500">
                                         {item.title}
                                     </h3>
-                                    <p className="text-gray-600 leading-relaxed font-medium">
+                                    <p className="text-gray-600 leading-normal font-medium">
                                         {item.content}
                                     </p>
 

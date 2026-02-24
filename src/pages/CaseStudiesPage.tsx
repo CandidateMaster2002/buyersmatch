@@ -60,7 +60,7 @@ const CaseStudiesPage: React.FC = () => {
                                 Case <span className="text-[#29b8bd]">Studies</span>
                             </h1>
                             <p className="text-xl text-gray-600 max-w-2xl mx-auto font-medium">
-                                Dive deep into our {siteConfig.successStories.length} successful property acquisitions and see the real-world results we deliver for our clients.
+                                Dive deep into our successful property acquisitions and see the real-world results we deliver for our clients.
                             </p>
                         </motion.div>
                     </div>
@@ -141,8 +141,8 @@ const CaseStudiesPage: React.FC = () => {
                             onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
                             disabled={currentPage === 1}
                             className={`w-12 h-12 rounded-full flex items-center justify-center border transition-all ${currentPage === 1
-                                    ? 'border-gray-100 text-gray-300 cursor-not-allowed'
-                                    : 'border-[#29b8bd] text-[#29b8bd] hover:bg-[#29b8bd] hover:text-white'
+                                ? 'border-gray-100 text-gray-300 cursor-not-allowed'
+                                : 'border-[#29b8bd] text-[#29b8bd] hover:bg-[#29b8bd] hover:text-white'
                                 }`}
                         >
                             <FontAwesomeIcon icon={faChevronLeft} />
@@ -156,8 +156,8 @@ const CaseStudiesPage: React.FC = () => {
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => handlePageChange(page)}
                                     className={`w-12 h-12 rounded-full font-bold transition-all ${currentPage === page
-                                            ? 'bg-[#29b8bd] text-white shadow-lg shadow-[#29b8bd]/30'
-                                            : 'bg-white text-gray-600 border border-gray-100 hover:border-[#29b8bd] hover:text-[#29b8bd]'
+                                        ? 'bg-[#29b8bd] text-white shadow-lg shadow-[#29b8bd]/30'
+                                        : 'bg-white text-gray-600 border border-gray-100 hover:border-[#29b8bd] hover:text-[#29b8bd]'
                                         }`}
                                 >
                                     {page}
@@ -171,8 +171,8 @@ const CaseStudiesPage: React.FC = () => {
                             onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
                             disabled={currentPage === totalPages}
                             className={`w-12 h-12 rounded-full flex items-center justify-center border transition-all ${currentPage === totalPages
-                                    ? 'border-gray-100 text-gray-300 cursor-not-allowed'
-                                    : 'border-[#29b8bd] text-[#29b8bd] hover:bg-[#29b8bd] hover:text-white'
+                                ? 'border-gray-100 text-gray-300 cursor-not-allowed'
+                                : 'border-[#29b8bd] text-[#29b8bd] hover:bg-[#29b8bd] hover:text-white'
                                 }`}
                         >
                             <FontAwesomeIcon icon={faChevronRight} />

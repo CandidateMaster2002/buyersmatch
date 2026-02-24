@@ -32,7 +32,7 @@ export const siteConfig = {
     logoText: "BM",
     contact: {
         address: "Glen Waverley, VIC 3150",
-        phones: ["+61 466 914 929"],
+        phones: ["466 914 929", "434 118 033"],
         email: "info@buyersmatch.com.au",
         calendly: "https://calendly.com/puja-2fa/initialmeeting",
     },
@@ -41,9 +41,12 @@ export const siteConfig = {
         { name: "instagram", icon: "Instagram", url: "https://www.instagram.com/buyers_match/?hl=en" },
         { name: "youtube", icon: "YouTube", url: "https://www.youtube.com/@BuyersMatch" },
         { name: "linkedin", icon: "LinkedIn", url: "https://www.linkedin.com/in/puja-dhanetwal/?originalSubdomain=au" },
-        { name: "tiktok", icon: "TikTok", url: "#" },
+        { name: "tiktok", icon: "TikTok", url: "https://www.tiktok.com/@buyersmatch" },
         { name: "maps", icon: "Maps", url: "https://www.google.com/maps/place/BuyersMatch/@-36.5712557,99.6994519,3z/data=!4m6!3m5!1s0x9a64e54f2968b55:0x765d586cc54a73c!8m2!3d-24.1501978!4d136.0132792!16s%2Fg%2F11v6z05n76?entry=ttu&g_ep=EgoyMDI2MDIwOC4wIKXMDSoASAFQAw%3D%3D" },
     ],
+    stats: {
+        totalClients: 150,
+    },
     navigation: [
         { id: "help", label: "Services" },
         { id: "process", label: "Process" },
@@ -59,6 +62,8 @@ export const siteConfig = {
         { id: 2, name: "Client Testimonial - Manju", quote: "", youtubeId: "X3TZe_DaO5g", image: "https://img.youtube.com/vi/X3TZe_DaO5g/maxresdefault.jpg" },
         { id: 3, name: "Client Testimonial - Dinah and Arjun", quote: "", youtubeId: "30we2JzIsE8", image: "https://img.youtube.com/vi/30we2JzIsE8/maxresdefault.jpg" },
         { id: 4, name: "BuyersMatch - Client Testimonial", quote: "", youtubeId: "q3IfD-X7Cf0", image: "https://img.youtube.com/vi/q3IfD-X7Cf0/maxresdefault.jpg" },
+        { id: 5, name: "When you Work with Experts", quote: "", youtubeId: "vLiopriS5HA", image: "https://img.youtube.com/vi/vLiopriS5HA/maxresdefault.jpg" },
+        { id: 6, name: "Thank You for Trusting Us", quote: "", youtubeId: "ISsxVHcajes", image: "https://img.youtube.com/vi/ISsxVHcajes/maxresdefault.jpg" },
     ],
     reviews: [
         { name: "John M.", rating: 5, date: "2 weeks ago", text: "Puja and Vishal are phenomenal! They found us an off-market property that perfectly matched our criteria. Their negotiation skills saved us thousands." },

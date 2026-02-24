@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { openCalendlyPopup } from '../utils/calendly';
 import AnimatedCounter from './AnimatedCounter';
 import MagneticButton from './MagneticButton';
+import { siteConfig } from '../config/site';
 
 const FinalCTA: React.FC = () => {
     return (
@@ -72,7 +73,7 @@ const FinalCTA: React.FC = () => {
                                     </div>
                                     <div className="text-left">
                                         <div className="text-white font-black text-base leading-none mb-1">
-                                            <AnimatedCounter value={500} suffix="+" /> Success Stories
+                                            <AnimatedCounter value={siteConfig.stats.totalClients} suffix="+" /> Success Stories
                                         </div>
                                         <div className="text-gray-500 text-xs font-bold uppercase tracking-widest">Across Australia</div>
                                     </div>

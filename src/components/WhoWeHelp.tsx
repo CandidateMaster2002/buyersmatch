@@ -75,12 +75,7 @@ const WhoWeHelp: React.FC = () => {
                                         {item.content}
                                     </p>
 
-                                    <div className="mt-8 flex items-center text-[#29b8bd] font-bold text-sm uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                        Learn More
-                                        <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                        </svg>
-                                    </div>
+
                                 </div>
                             </div>
                         </motion.div>

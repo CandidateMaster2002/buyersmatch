@@ -79,7 +79,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, scrollTargetRef }) => 
     return (
         <header className="relative z-[100] w-full bg-white">
             {/* Top Bar Header */}
-            <div className={`transition-all duration-500 ease-in-out ${isScrolled ? 'max-h-0 opacity-0 overflow-hidden' : 'max-h-20 opacity-100'}`}>
+            <div className={`transition-all duration-500 ease-in-out ${isScrolled ? 'max-h-0 opacity-0 overflow-hidden' : 'max-h-40 opacity-100'}`}>
                 <TopBar />
             </div>
 

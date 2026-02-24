@@ -1,5 +1,6 @@
 import React from 'react';
 import AnimatedCounter from './AnimatedCounter';
+import { siteConfig } from '../config/site';
 
 const SocialProofStrip: React.FC = () => {
     return (
@@ -45,7 +46,7 @@ const SocialProofStrip: React.FC = () => {
                         </div>
                         <div className="text-left">
                             <div className="font-black text-gray-900 text-lg">
-                                <AnimatedCounter value={150} suffix="+" />
+                                <AnimatedCounter value={siteConfig.stats.totalClients} suffix="+" />
                             </div>
                             <div className="text-gray-500 text-sm font-medium">Properties Secured</div>
                         </div>

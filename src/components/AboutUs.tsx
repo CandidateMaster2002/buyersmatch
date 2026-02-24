@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import AnimatedCounter from './AnimatedCounter';
 import AnimatedText from './AnimatedText';
 import pujaVishalImg from '../assets/owners.jpeg';
+import { siteConfig } from '../config/site';
 
 const AboutUsSection: React.FC = () => {
     return (
@@ -39,7 +40,7 @@ const AboutUsSection: React.FC = () => {
                                     </div>
                                     <div>
                                         <div className="font-black text-gray-900 text-lg">
-                                            <AnimatedCounter value={150} suffix="+" />
+                                            <AnimatedCounter value={siteConfig.stats.totalClients} suffix="+" />
                                         </div>
                                         <div className="text-gray-600 text-sm font-semibold">Happy Clients</div>
                                     </div>

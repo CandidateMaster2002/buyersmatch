@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { siteConfig } from '../config/site';
 import { openCalendlyPopup } from '../utils/calendly';
@@ -12,6 +13,8 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ scrollToSection, scrollTargetRef }) => {
+    const navigate = useNavigate();
+    const location = useLocation();
     const [activeSection, setActiveSection] = useState<string>('');
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -92,7 +95,9 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, scrollTargetRef }) => 
                         <div
                             className="flex items-center cursor-pointer group"
                             onClick={() => {
-                                if (scrollTargetRef?.current) {
+                                if (location.pathname !== '/') {
+                                    navigate('/');
+                                } else if (scrollTargetRef?.current) {
                                     scrollTargetRef.current.scrollTo({ top: 0, behavior: 'smooth' });
                                 } else {
                                     window.scrollTo({ top: 0, behavior: 'smooth' });

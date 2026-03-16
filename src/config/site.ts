@@ -32,7 +32,7 @@ export const siteConfig = {
     logoText: "BM",
     contact: {
         address: "Glen Waverley, VIC 3150",
-        phones: ["0 466 914 929", "0 434 118 033"],
+        phones: ["0466 914 929", "0434 118 033"],
         email: "info@buyersmatch.com.au",
         calendly: "https://calendly.com/puja-2fa/initialmeeting",
     },
